@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System;
+using UnityEditor.UIElements;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
@@ -19,18 +20,24 @@ namespace VirtualDeviants.Dialogue.Editor
         private void CreateGUI()
         {
             AddGraphView();
+            AddToolbar();
             AddStyles();
+        }
+
+        private void AddToolbar()
+        {
+            Toolbar toolbar = new Toolbar();
+            rootVisualElement.Add(toolbar);
         }
 
         private void AddStyles()
         {
-            StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load("Dialogue/DialogueVariables.uss");
-            rootVisualElement.styleSheets.Add(styleSheet);
+            rootVisualElement.AddStyleSheets("Dialogue/DSVariables.uss");
         }
 
         private void AddGraphView()
         {
-            DialogueGraphView graphView = new DialogueGraphView();
+            DSGraphView graphView = new DSGraphView();
 
             graphView.StretchToParentSize();
             

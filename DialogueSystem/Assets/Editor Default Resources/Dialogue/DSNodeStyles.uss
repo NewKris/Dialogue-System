@@ -1,0 +1,48 @@
+.ds-node_title {
+}
+
+.ds-node_title-container {
+	padding: 4px;
+}
+
+.ds-node-text_text {
+	min-width: 500px;
+	max-width: 500px;
+	min-height: 25px;
+	max-height: none;
+	margin: 8px;
+	margin-top: 0px;
+}
+
+.ds-node-text_name {
+	align-self: center;
+	font-size: 50px;
+	margin: 16px;
+}
+
+.ds-node-text_container {
+	background-color: #2D2D2D;
+	justify-content: center;
+}
+
+.ds-node-entry_title {
+	align-self: center;
+	font-size: 50px;
+	margin: 8px;
+}
+
+.ds-node-entry_title-container {
+	background-color: #3ACF38;
+	align-content: center;
+}
+
+.ds-node-exit_title {
+	align-self: center;
+	font-size: 50px;
+	margin: 8px;
+}
+
+.ds-node-exit_title-container {
+	background-color: #CD1929;
+	align-content: center;
+}

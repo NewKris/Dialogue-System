@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace VirtualDeviants.Dialogue.Enumerations
 {
-    public enum DialogueType
+    public enum DSNodeType
     {
-        Continue,
-        Choice
+        Text,
+        Choice,
+        Entry,
+        Exit
     }
 }
