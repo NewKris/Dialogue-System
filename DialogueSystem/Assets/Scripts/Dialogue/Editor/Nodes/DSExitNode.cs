@@ -9,9 +9,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class DSExitNode : DSNode
     {
 
-        private const string exitTitleContainerClass = "ds-node-exit_title-container";
-        private const string exitTitleClass = "ds-node-exit_title";
-
+        private const string containerStyle = "ds-node_exit-title_container";
 
         public override void Initialize(Vector2 position)
         {
@@ -22,14 +20,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public override void Draw()
         {
-            Label title = DSElementUtility.CreateLabel(NodeName);
-            title.AddClasses(exitTitleClass);
+            base.Draw();
+            AddInputPort();
 
-            titleContainer.Insert(0, title);
-            titleButtonContainer.AddClasses(exitTitleContainerClass);
-
-            Port inputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi));
-            inputContainer.Add(inputPort);
+            titleButtonContainer.AddClasses(containerStyle);
         }
 
 

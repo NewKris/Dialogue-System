@@ -11,17 +11,54 @@ namespace VirtualDeviants.Dialogue.Editor
 {
     public class DSGraphView : GraphView
     {
-        
-        public DSGraphView()
+
+        private DialogueAuthorWindow _authorWindow;
+        private DSSearchWindow _searchWindow;
+
+        public DSGraphView(DialogueAuthorWindow authorWindow)
         {
+            AddSearchWindow();
             AddManipulators();
             AddGridBackground();
 
             AddStyles();
+            _authorWindow = authorWindow;
         }
 
-        private DSNode CreateNode(DSNodeType nodeType, Vector2 position)
+        private void AddSearchWindow()
         {
+            if (_searchWindow == null) 
+                _searchWindow = ScriptableObject.CreateInstance<DSSearchWindow>();
+
+            _searchWindow.Initialize(this);
+
+            nodeCreationRequest = context => SearchWindow.Open(
+                new SearchWindowContext(context.screenMousePosition), 
+                _searchWindow);
+        }
+
+        private void AddManipulators()
+        {
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+
+            this.AddManipulator(new ContentDragger());
+            this.AddManipulator(new SelectionDragger());
+            this.AddManipulator(new RectangleSelector());
+            this.AddManipulator(CreateNodeContextualMenu());
+        }
+
+        private void AddMenuEvents(ContextualMenuPopulateEvent menuEvents)
+        {
+            menuEvents.menu.AppendAction("Create Group", x => AddElement(CreateGroup("Dialogue Group", x.eventInfo.localMousePosition)));
+            /*menuEvents.menu.AppendAction("Add Entry Node", x => AddElement(CreateNode(DSNodeType.Entry, x.eventInfo.localMousePosition)));
+            menuEvents.menu.AppendAction("Add Text Node", x => AddElement(CreateNode(DSNodeType.Text, x.eventInfo.localMousePosition)));
+            menuEvents.menu.AppendAction("Add Choice Node", x => AddElement(CreateNode(DSNodeType.Choice, x.eventInfo.localMousePosition)));
+            menuEvents.menu.AppendAction("Add Exit Node", x => AddElement(CreateNode(DSNodeType.Exit, x.eventInfo.localMousePosition)));*/
+        }
+
+        public DSNode CreateNode(DSNodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
+        {
+            mousePosition = GetLocalMousePosition(mousePosition, searchWindow);
 
             DSNode node;
 
@@ -41,7 +78,7 @@ namespace VirtualDeviants.Dialogue.Editor
                     break;
             }
 
-            node.Initialize(position);
+            node.Initialize(mousePosition);
             node.Draw();
 
             return node;
@@ -62,33 +99,17 @@ namespace VirtualDeviants.Dialogue.Editor
             return compatiblePorts;
         }
 
-        private void AddManipulators()
-        {
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
-
-            this.AddManipulator(new ContentDragger());
-            this.AddManipulator(new SelectionDragger());
-            this.AddManipulator(new RectangleSelector());
-            this.AddManipulator(CreateNodeContextualMenu());
-        }
-
         private IManipulator CreateNodeContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(AddMenuEvents);
             return contextualMenuManipulator;
         }
 
-        private void AddMenuEvents(ContextualMenuPopulateEvent menuEvents)
-        {
-            menuEvents.menu.AppendAction("Create Group", x => AddElement(CreateGroup("Dialogue Group", x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Entry Node", x => AddElement(CreateNode(DSNodeType.Entry, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Text Node", x => AddElement(CreateNode(DSNodeType.Text, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Choice Node", x => AddElement(CreateNode(DSNodeType.Choice, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Exit Node", x => AddElement(CreateNode(DSNodeType.Exit, x.eventInfo.localMousePosition)));
-        }
-
         private Group CreateGroup(string groupName, Vector2 mousePosition)
         {
+
+            mousePosition = GetLocalMousePosition(mousePosition);
+
             Group group = new Group()
             {
                 title = groupName,
@@ -120,5 +141,17 @@ namespace VirtualDeviants.Dialogue.Editor
             gridBackground.StretchToParentSize();
             Insert(0, gridBackground);
         }
+
+        public Vector2 GetLocalMousePosition(Vector2 mouseScreenPos, bool isSearchWindow = false)
+        {
+
+            if (isSearchWindow)
+                mouseScreenPos -= _authorWindow.position.position;
+
+            Vector2 localPosition = contentViewContainer.WorldToLocal(mouseScreenPos);
+
+            return localPosition;
+        }
+
     }
 }

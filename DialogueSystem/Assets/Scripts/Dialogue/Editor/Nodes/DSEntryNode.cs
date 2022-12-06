@@ -9,8 +9,11 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class DSEntryNode : DSNode
     {
 
-        private const string entryTitleContainerClass = "ds-node-entry_title-container";
-        private const string entryTitleClass = "ds-node-entry_title";
+        private const string containerStyle = "ds-node_entry-title_container";
+        private const string idContainerStyle = "ds-node_entry-id_container";
+        private const string idtextStyle = "ds-node_entry-id";
+
+        public string EntryID { get; set; }
 
         public override void Initialize(Vector2 position)
         {
@@ -21,14 +24,18 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public override void Draw()
         {
-            Label title = DSElementUtility.CreateLabel(NodeName);
-            title.AddClasses(entryTitleClass);
+            base.Draw();
+            AddOutputPort();
 
-            titleContainer.Insert(0, title);
-            titleButtonContainer.AddClasses(entryTitleContainerClass);
+            titleButtonContainer.AddClasses(containerStyle);
 
-            Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
-            outputContainer.Add(outputPort);
+            VisualElement customContainer = new VisualElement();
+            TextField idField = DSElementUtility.CreateTextField("ID");
+            idField.AddClasses(idtextStyle);
+            customContainer.Add(idField);
+            customContainer.AddClasses(idContainerStyle);
+
+            extensionContainer.Add(customContainer);
         }
 
     }

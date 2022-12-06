@@ -29,8 +29,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public abstract class DSNode : Node
     {
 
-        private const string titleClass = "ds-node_title";
-        private const string titleContainerClass = "ds-node_title-container";
+        private const string titleStyle = "ds-node_title";
+        private const string titleContainerStyle = "ds-node_title_container";
+        private const string dragAreaStyle = "ds-node_drag";
 
         public string NodeName { get; set; }
 
@@ -42,16 +43,30 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         public virtual void Draw()
         {
             // Title
-
             TextField title = DSElementUtility.CreateTextField(NodeName);
-            title.AddClasses(titleClass);
+            title.AddClasses(titleStyle);
 
-            titleContainer.AddToClassList(titleContainerClass);
             titleContainer.Insert(0, title);
+            titleContainer.AddToClassList(titleContainerStyle);
 
+            // Drag Area
+            VisualElement dragArea = new VisualElement();
+            dragArea.AddClasses(dragAreaStyle);
+            mainContainer.Insert(0, dragArea);
+        }
+
+        protected void AddInputPort()
+        {
             // Input Port
             Port inputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi));
             inputContainer.Add(inputPort);
+        }
+
+        protected void AddOutputPort()
+        {
+            // Output Port
+            Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
+            outputContainer.Add(outputPort);
         }
 
     }

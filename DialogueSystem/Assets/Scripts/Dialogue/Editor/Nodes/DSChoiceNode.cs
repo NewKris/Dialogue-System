@@ -8,8 +8,12 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
     public class DSChoiceNode : DSNode
     {
-        
-        public List<string> Choices { get; set; }
+
+        private const string deleteButtonStyle = "ds-node_choice-delete_button";
+        private const string addChoiceStyle = "ds-node_choice-add";
+        private const string choiceTextStyle = "ds-node_choice-text";
+
+        public List<TextField> Choices { get; set; }
 
         public override void Initialize(Vector2 position)
         {
@@ -17,17 +21,24 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             base.Initialize(position);
 
             NodeName = "Choices";
-            Choices = new List<string>() { "Choice 1", "Choice 2"};
+            Choices = new List<TextField>() 
+            { 
+                DSElementUtility.CreateTextField("Choice 1"),
+                DSElementUtility.CreateTextField("Choice 2")
+            };
         }
 
         public override void Draw()
         {
             base.Draw();
 
-            Button addChoice = DSElementUtility.CreateButton("+", AddChoice);
-            mainContainer.Insert(1, addChoice);
+            AddInputPort();
 
-            foreach (string choice in Choices)
+            Button addChoice = DSElementUtility.CreateButton("+", AddChoice);
+            addChoice.AddClasses(addChoiceStyle);
+            mainContainer.Add(addChoice);
+
+            foreach (TextField choice in Choices)
             {
                 Port outputPort = CreateChoicePort(choice);
                 outputContainer.Add(outputPort);
@@ -38,24 +49,34 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private void AddChoice()
         {
-            string newChoice = "Choice " + (Choices.Count + 1);
-            Choices.Add(newChoice);
+            string newChoiceName = "Choice " + (Choices.Count + 1);
+            TextField choiceText = DSElementUtility.CreateTextField(newChoiceName);
+            Choices.Add(choiceText);
 
-            outputContainer.Add(CreateChoicePort(newChoice));
+            outputContainer.Add(CreateChoicePort(choiceText));
         }
 
-        private Port CreateChoicePort(string portName)
+        private Port CreateChoicePort(TextField choiceName)
         {
+            choiceName.AddClasses(choiceTextStyle);
+
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
 
-            Button deleteChoice = DSElementUtility.CreateButton("X");
+            Button deleteChoice = DSElementUtility.CreateButton("X", () => DeleteChoice(choiceName, outputPort));
+            deleteChoice.AddClasses(deleteButtonStyle);
 
-            TextField choiceText = DSElementUtility.CreateTextField(portName);
-
-            outputPort.Add(choiceText);
+            outputPort.Add(choiceName);
             outputPort.Add(deleteChoice);
 
             return outputPort;
+        }
+
+        private void DeleteChoice(TextField choiceName, Port targetPort)
+        {
+            if (Choices.Count <= 1) return;
+
+            Choices.Remove(choiceName);
+            outputContainer.Remove(targetPort);
         }
 
     }

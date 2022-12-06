@@ -9,9 +9,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class DSTextNode : DSNode
     {
 
-        private const string textClass = "ds-node-text_text";
-        private const string nameClass = "ds-node-text_name";
-        private const string textContainerClass = "ds-node-text_container";
+        private const string textStyle = "ds-node_text-text";
+        private const string nameStyle = "ds-node_text-name";
+        private const string textContainerStyle = "ds-node_text-container";
+        private const string externalContainerStyle = "ds-node_text-external_container";
 
         public string Speaker { get; set; }
         public string Text { get; set; }
@@ -29,23 +30,23 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         {
             base.Draw();
 
-            // Output Port
-            Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
-            outputContainer.Add(outputPort);
+            AddInputPort();
+            AddOutputPort();
 
             // Contents
             VisualElement customDataContainer = new VisualElement();
-            customDataContainer.AddClasses(textContainerClass);
+            customDataContainer.AddClasses(textContainerStyle);
 
             TextField speaker = DSElementUtility.CreateTextField("Speaker");
-            speaker.AddClasses(nameClass);
+            speaker.AddClasses(nameStyle);
 
             TextField text = DSElementUtility.CreateTextArea("Text");
-            text.AddClasses(textClass);
+            text.AddClasses(textStyle);
 
             customDataContainer.Add(speaker);
             customDataContainer.Add(text);
             extensionContainer.Add(customDataContainer);
+            extensionContainer.AddClasses(externalContainerStyle);
 
             RefreshExpandedState();
 

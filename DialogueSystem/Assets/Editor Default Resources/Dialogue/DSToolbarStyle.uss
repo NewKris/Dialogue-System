@@ -1,0 +1,33 @@
+.ds-toolbar_container {
+	height: 40px;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+}
+
+.ds-toolbar_element {
+	height: 75%;
+}
+
+.ds-toolbar_textfield > .unity-text-field__input {
+	height: 30px;
+	padding: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.ds-toolbar_button {
+	border-color: var(--ds-colors-blue-2);
+	background-color: #2D2D2E;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.ds-toolbar_button:hover {
+	background-color: #5A5A5A;
+}
+
+.ds-toolbar_button:active {
+	background-color: var(--ds-colors-blue-2);
+}
