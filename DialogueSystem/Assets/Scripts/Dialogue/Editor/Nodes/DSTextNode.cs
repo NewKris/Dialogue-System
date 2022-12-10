@@ -14,16 +14,17 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private const string textContainerStyle = "ds-node_text-container";
         private const string externalContainerStyle = "ds-node_text-external_container";
 
-        public string Speaker { get; set; }
-        public string Text { get; set; }
+        private TextField _speaker;
+        private TextField _text;
+
+        public string Speaker => _speaker.value;
+        public string Text => _text.value;
 
         public override void Initialize(Vector2 position)
         {
             base.Initialize(position);
 
             NodeName = "Dialogue Text";
-            Speaker = "Narrator";
-            Text = "Lorem Ipsum";
         }
 
         public override void Draw()
@@ -33,23 +34,21 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             AddInputPort();
             AddOutputPort();
 
-            // Contents
             VisualElement customDataContainer = new VisualElement();
             customDataContainer.AddClasses(textContainerStyle);
 
-            TextField speaker = DSElementUtility.CreateTextField("Speaker");
-            speaker.AddClasses(nameStyle);
+            _speaker = DSElementUtility.CreateTextField("Speaker");
+            _speaker.AddClasses(nameStyle);
 
-            TextField text = DSElementUtility.CreateTextArea("Text");
-            text.AddClasses(textStyle);
+            _text = DSElementUtility.CreateTextArea("Text");
+            _text.AddClasses(textStyle);
 
-            customDataContainer.Add(speaker);
-            customDataContainer.Add(text);
+            customDataContainer.Add(_speaker);
+            customDataContainer.Add(_text);
             extensionContainer.Add(customDataContainer);
             extensionContainer.AddClasses(externalContainerStyle);
 
             RefreshExpandedState();
-
         }
 
     }
