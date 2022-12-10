@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Editor.Helpers;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
-    public class DSChoiceNode : DSNode
+    public class GraphChoiceNode : GraphNode
     {
 
         private const string deleteButtonStyle = "ds-node_choice-delete_button";
@@ -23,8 +24,8 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             NodeName = "Choices";
             Choices = new List<TextField>() 
             { 
-                DSElementUtility.CreateTextField("Choice 1"),
-                DSElementUtility.CreateTextField("Choice 2")
+                ElementUtility.CreateTextField("Choice 1"),
+                ElementUtility.CreateTextField("Choice 2")
             };
         }
 
@@ -34,7 +35,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
             AddInputPort();
 
-            Button addChoice = DSElementUtility.CreateButton("+", AddChoice);
+            Button addChoice = ElementUtility.CreateButton("+", AddChoice);
             addChoice.AddClasses(addChoiceStyle);
             mainContainer.Add(addChoice);
 
@@ -50,7 +51,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private void AddChoice()
         {
             string newChoiceName = "Choice " + (Choices.Count + 1);
-            TextField choiceText = DSElementUtility.CreateTextField(newChoiceName);
+            TextField choiceText = ElementUtility.CreateTextField(newChoiceName);
             Choices.Add(choiceText);
 
             outputContainer.Add(CreateChoicePort(choiceText));
@@ -62,7 +63,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
 
-            Button deleteChoice = DSElementUtility.CreateButton("X", () => DeleteChoice(choiceName, outputPort));
+            Button deleteChoice = ElementUtility.CreateButton("X", () => DeleteChoice(choiceName, outputPort));
             deleteChoice.AddClasses(deleteButtonStyle);
 
             outputPort.Add(choiceName);

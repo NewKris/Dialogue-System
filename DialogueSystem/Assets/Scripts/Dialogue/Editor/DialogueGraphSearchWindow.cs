@@ -6,15 +6,15 @@ using VirtualDeviants.Dialogue.Enumerations;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
-    public class DSSearchWindow : ScriptableObject, ISearchWindowProvider
+    public class DialogueGraphSearchWindow : ScriptableObject, ISearchWindowProvider
     {
 
-        private DSGraphView _graphView;
+        private DialogueGraphView _graphView;
         private Texture2D _indent;
 
         List<SearchTreeEntry> searchEntries;
 
-        public void Initialize(DSGraphView graphView)
+        public void Initialize(DialogueGraphView graphView)
         {
             _graphView = graphView;
 

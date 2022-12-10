@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -7,11 +6,29 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Nodes;
 
-namespace VirtualDeviants.Dialogue.Editor
+namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
-    public static class DSElementUtility
+    public static class ElementUtility
     {
+        public static Group CreateGroup(string groupName, Vector2 mousePosition, List<ISelectable> graphSelection)
+        {
+            Group group = new Group()
+            {
+                title = groupName,
+            };
 
+            group.SetPosition(new Rect(mousePosition, Vector2.one));
+
+            foreach (GraphElement selectedElement in graphSelection)
+            {
+                if (!(selectedElement is GraphNode)) continue;
+
+                group.AddElement(selectedElement);
+            }
+
+            return group;
+        }
+        
         public static VisualElement AddClasses(this VisualElement element, params string[] classes)
         {
             foreach (string styleClass in classes)
@@ -33,7 +50,7 @@ namespace VirtualDeviants.Dialogue.Editor
             return element;
         }
 
-        public static Port CreatePort(this DSNode node, string portName, PortSettings portSettings)
+        public static Port CreatePort(this GraphNode node, string portName, PortSettings portSettings)
         {
             Port port = node.InstantiatePort(portSettings.orientation, portSettings.direction, portSettings.capacity, typeof(bool));
             port.portName = portName;

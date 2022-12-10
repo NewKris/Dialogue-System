@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.Enumerations;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
@@ -26,7 +27,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     PlayRegion(string regionGUI)
     */
 
-    public abstract class DSNode : Node
+    public abstract class GraphNode : Node
     {
 
         private const string titleStyle = "ds-node_title";
@@ -43,7 +44,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         public virtual void Draw()
         {
             // Title
-            TextField title = DSElementUtility.CreateTextField(NodeName);
+            TextField title = ElementUtility.CreateTextField(NodeName);
             title.AddClasses(titleStyle);
 
             titleContainer.Insert(0, title);

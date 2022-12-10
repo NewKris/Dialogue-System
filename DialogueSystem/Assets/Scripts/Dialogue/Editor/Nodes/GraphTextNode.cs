@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Editor.Helpers;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
-    public class DSTextNode : DSNode
+    public class GraphTextNode : GraphNode
     {
 
         private const string textStyle = "ds-node_text-text";
@@ -37,10 +38,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             VisualElement customDataContainer = new VisualElement();
             customDataContainer.AddClasses(textContainerStyle);
 
-            _speaker = DSElementUtility.CreateTextField("Speaker");
+            _speaker = ElementUtility.CreateTextField("Speaker");
             _speaker.AddClasses(nameStyle);
 
-            _text = DSElementUtility.CreateTextArea("Text");
+            _text = ElementUtility.CreateTextArea("Text");
             _text.AddClasses(textStyle);
 
             customDataContainer.Add(_speaker);

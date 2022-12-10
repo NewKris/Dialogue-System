@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Editor.Helpers;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
-    public class DSEntryNode : DSNode
+    public class GraphEntryNode : GraphNode
     {
 
         private const string containerStyle = "ds-node_entry-title_container";
@@ -30,7 +31,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             titleButtonContainer.AddClasses(containerStyle);
 
             VisualElement customContainer = new VisualElement();
-            TextField idField = DSElementUtility.CreateTextField("ID");
+            TextField idField = ElementUtility.CreateTextField("ID");
             idField.AddClasses(idtextStyle);
             customContainer.Add(idField);
             customContainer.AddClasses(idContainerStyle);

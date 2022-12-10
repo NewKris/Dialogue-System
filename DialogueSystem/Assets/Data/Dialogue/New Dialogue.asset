@@ -13,59 +13,15 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 1575402493622878248
-  - rid: 1575402493622878249
-  - rid: 1575402493622878250
-  - rid: 1575402493622878251
-  - rid: 1575402493622878252
-  - rid: 1575402493622878253
+  - rid: 1575402493622878254
   references:
     version: 2
     RefIds:
-    - rid: 1575402493622878248
-      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
+    - rid: 1575402493622878254
+      type: {class: TextNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
       data:
-        nodeName: Exit
-        guid: e26e34c7-1358-462d-8da3-e9dd1221ecee
+        nodeName: Dialogue Text
+        guid: e931d2bf-80f9-4497-819f-6fc6c57cdc89
         outputGuids: []
-    - rid: 1575402493622878249
-      type: {class: TextDialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: bfa2e8e5-828c-4f9e-b7a8-e878b48a54c4
-        outputGuids:
-        - e26e34c7-1358-462d-8da3-e9dd1221ecee
         speaker: Speaker
-        text: 3
-    - rid: 1575402493622878250
-      type: {class: TextDialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: d79a163e-22cd-4d3e-a7b7-d870741ce0a5
-        outputGuids:
-        - bfa2e8e5-828c-4f9e-b7a8-e878b48a54c4
-        speaker: Speaker
-        text: 2
-    - rid: 1575402493622878251
-      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
-      data:
-        nodeName: Start
-        guid: 67613e92-eeec-4562-a1f9-9cd0b5551565
-        outputGuids:
-        - d79a163e-22cd-4d3e-a7b7-d870741ce0a5
-    - rid: 1575402493622878252
-      type: {class: TextDialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: a553fca2-0044-4b20-9586-f2f214116cce
-        outputGuids:
-        - bfa2e8e5-828c-4f9e-b7a8-e878b48a54c4
-        speaker: Speaker
-        text: 1
-    - rid: 1575402493622878253
-      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.GraphSaving, asm: Assembly-CSharp}
-      data:
-        nodeName: Start
-        guid: da032b4a-b24c-4462-8323-884a832f6c49
-        outputGuids:
-        - a553fca2-0044-4b20-9586-f2f214116cce
+        text: Text

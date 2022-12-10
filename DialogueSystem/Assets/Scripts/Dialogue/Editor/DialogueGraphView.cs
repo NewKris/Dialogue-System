@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.Editor.Nodes;
 using VirtualDeviants.Dialogue.Enumerations;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
-    public class DSGraphView : GraphView
+    public class DialogueGraphView : GraphView
     {
 
         private DialogueAuthorWindow _authorWindow;
-        private DSSearchWindow _searchWindow;
+        private DialogueGraphSearchWindow _searchWindow;
 
-        public DSGraphView(DialogueAuthorWindow authorWindow)
+        public DialogueGraphView(DialogueAuthorWindow authorWindow)
         {
             AddSearchWindow();
             AddManipulators();
@@ -28,7 +29,7 @@ namespace VirtualDeviants.Dialogue.Editor
         private void AddSearchWindow()
         {
             if (_searchWindow == null) 
-                _searchWindow = ScriptableObject.CreateInstance<DSSearchWindow>();
+                _searchWindow = ScriptableObject.CreateInstance<DialogueGraphSearchWindow>();
 
             _searchWindow.Initialize(this);
 
@@ -49,32 +50,32 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void AddMenuEvents(ContextualMenuPopulateEvent menuEvents)
         {
-            menuEvents.menu.AppendAction("Create Group", x => AddElement(CreateGroup("Dialogue Group", x.eventInfo.localMousePosition)));
-            /*menuEvents.menu.AppendAction("Add Entry Node", x => AddElement(CreateNode(DSNodeType.Entry, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Text Node", x => AddElement(CreateNode(DSNodeType.Text, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Choice Node", x => AddElement(CreateNode(DSNodeType.Choice, x.eventInfo.localMousePosition)));
-            menuEvents.menu.AppendAction("Add Exit Node", x => AddElement(CreateNode(DSNodeType.Exit, x.eventInfo.localMousePosition)));*/
+            menuEvents.menu.AppendAction("Create Group", x => 
+                AddElement(ElementUtility.CreateGroup(
+                    groupName: "Dialogue Group", 
+                    mousePosition: GetLocalMousePosition(x.eventInfo.localMousePosition), 
+                    graphSelection: selection)));
         }
 
-        public DSNode CreateNode(DSNodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
+        public GraphNode CreateNode(DSNodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
         {
             mousePosition = GetLocalMousePosition(mousePosition, searchWindow);
 
-            DSNode node;
+            GraphNode node;
 
             switch (nodeType)
             {
                 case DSNodeType.Text:
-                    node = new DSTextNode();
+                    node = new GraphTextNode();
                     break;
                 case DSNodeType.Choice:
-                    node = new DSChoiceNode();
+                    node = new GraphChoiceNode();
                     break;
                 case DSNodeType.Exit:
-                    node = new DSExitNode();
+                    node = new GraphExitNode();
                     break;
                 default:
-                    node = new DSEntryNode();
+                    node = new GraphEntryNode();
                     break;
             }
 
@@ -105,28 +106,6 @@ namespace VirtualDeviants.Dialogue.Editor
             return contextualMenuManipulator;
         }
 
-        private Group CreateGroup(string groupName, Vector2 mousePosition)
-        {
-
-            mousePosition = GetLocalMousePosition(mousePosition);
-
-            Group group = new Group()
-            {
-                title = groupName,
-            };
-
-            group.SetPosition(new Rect(mousePosition, Vector2.one));
-
-            foreach (GraphElement selectedElement in selection)
-            {
-                if (!(selectedElement is DSNode)) continue;
-
-                group.AddElement(selectedElement);
-            }
-
-            return group;
-        }
-
         private void AddStyles()
         {
             this.AddStyleSheets(
@@ -142,7 +121,7 @@ namespace VirtualDeviants.Dialogue.Editor
             Insert(0, gridBackground);
         }
 
-        public Vector2 GetLocalMousePosition(Vector2 mouseScreenPos, bool isSearchWindow = false)
+        private Vector2 GetLocalMousePosition(Vector2 mouseScreenPos, bool isSearchWindow = false)
         {
 
             if (isSearchWindow)
