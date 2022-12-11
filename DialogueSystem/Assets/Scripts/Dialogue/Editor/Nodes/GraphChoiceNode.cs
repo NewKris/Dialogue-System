@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -77,6 +78,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             if (Choices.Count <= 1) return;
 
             Choices.Remove(choiceName);
+            
+            if(targetPort.connected)
+                targetPort.connections.First().RemoveFromHierarchy();
+            
             outputContainer.Remove(targetPort);
         }
 
