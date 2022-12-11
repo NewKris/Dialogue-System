@@ -1,12 +1,19 @@
-﻿using UnityEditor;
+﻿using System;
+using System.IO;
+using UnityEditor;
+using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.SerializedAsset;
+using Object = UnityEngine.Object;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
 	public static class AssetCreator
 	{
-		public static void CreateDialogueAsset(string path, DialogueAsset newAsset)
+		public static void CreateAsset(string path, Object newAsset)
 		{
+			if (File.Exists(path))
+				AssetDatabase.DeleteAsset(path);
+			
 			AssetDatabase.CreateAsset(newAsset, path);
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
@@ -14,16 +21,5 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			Selection.activeObject = newAsset;
 		}
 
-		public static void UpdateDialogueAsset(string path, Node[] newNodes)
-		{
-			DialogueAsset existingAsset = (DialogueAsset) AssetDatabase.LoadAssetAtPath(path, typeof(DialogueAsset));
-			existingAsset.nodes = newNodes;
-			
-			AssetDatabase.SaveAssets();
-			AssetDatabase.Refresh();
-			EditorUtility.FocusProjectWindow();
-			Selection.activeObject = existingAsset;
-		}
-		
 	}
 }

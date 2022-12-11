@@ -1,8 +1,10 @@
 using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.SerializedAsset;
 using Node = VirtualDeviants.Dialogue.SerializedAsset.Node;
@@ -83,34 +85,26 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void SaveActiveGraph()
         {
+
+            GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
+            string path = SavePath + GraphName.value + "Graph.asset";
             
+            AssetCreator.CreateAsset(path, graphAsset);
         }
 
         private void LoadGraph()
         {
-
         }
 
         private void ExportActiveGraph()
         {
-            Node[] nodes = GraphConverter.ConvertGraph(Graph);
+            DialogueAsset dialogueAsset = DialogueAssetConverter.ConvertToAsset(Graph);
             
             // TODO
             // Open the FileDialog to select a save location
 
             string path = SavePath + GraphName.value + ".asset";
-
-            if (File.Exists(path))
-            {
-                AssetCreator.UpdateDialogueAsset(path, nodes);
-            }
-            else
-            {
-                DialogueAsset newAsset = CreateInstance<DialogueAsset>();
-                newAsset.nodes = nodes;
-
-                AssetCreator.CreateDialogueAsset(path, newAsset);    
-            }
+            AssetCreator.CreateAsset(path, dialogueAsset);
         }
 
         private void ImportGraph()

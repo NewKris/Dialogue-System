@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VirtualDeviants.Dialogue.Enumerations
 {
-    public enum DSNodeType
+    public enum NodeType
     {
         Text,
         Choice,

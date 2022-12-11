@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Nodes;
 using VirtualDeviants.Dialogue.SerializedAsset;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
-	public static class NodeConverter
+	public static class DialogueNodeConverter
 	{
 
 		public static Node MapData(GraphNode node)
@@ -13,8 +14,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			{
 				GraphTextNode textNode => MapToTextNode(textNode),
 				GraphChoiceNode choiceNode => MapToChoiceNode(choiceNode),
-				GraphEntryNode entryNode => MapToEntryNode(entryNode),
-				_ => MapToExitNode(node as GraphExitNode)
+				_ => MapToNode(node)
 			};
 		}
 		
@@ -37,21 +37,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			};
 		}
 		
-		private static Node MapToEntryNode(GraphEntryNode entryNode)
+		private static Node MapToNode(GraphNode entryNode)
 		{
 			return new Node()
 			{
 				nodeName = entryNode.NodeName
 			};
 		}
-		
-		private static Node MapToExitNode(GraphExitNode exitNode)
-		{
-			return new Node()
-			{
-				nodeName = exitNode.NodeName
-			};
-		}
-		
+
 	}
 }

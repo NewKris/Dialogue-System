@@ -25,12 +25,12 @@ namespace VirtualDeviants.Dialogue.Editor
             searchEntries = new List<SearchTreeEntry>()
             {
                 new SearchTreeGroupEntry(new GUIContent("Create Node")),
-                new SearchTreeEntry(new GUIContent("Text", _indent)) {level = 1, userData = DSNodeType.Text},
-                new SearchTreeEntry(new GUIContent("Choice", _indent)) {level = 1, userData = DSNodeType.Choice},
+                new SearchTreeEntry(new GUIContent("Text", _indent)) {level = 1, userData = NodeType.Text},
+                new SearchTreeEntry(new GUIContent("Choice", _indent)) {level = 1, userData = NodeType.Choice},
 
                 new SearchTreeGroupEntry(new GUIContent("Flow"), 1),
-                new SearchTreeEntry(new GUIContent("Entry", _indent)) {level = 2, userData = DSNodeType.Entry},
-                new SearchTreeEntry(new GUIContent("Exit", _indent)) {level = 2, userData = DSNodeType.Exit},
+                new SearchTreeEntry(new GUIContent("Entry", _indent)) {level = 2, userData = NodeType.Entry},
+                new SearchTreeEntry(new GUIContent("Exit", _indent)) {level = 2, userData = NodeType.Exit},
 
                 new SearchTreeGroupEntry(new GUIContent("Effects"), 1),
             };
@@ -43,7 +43,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
         public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
         {
-            DSNodeType nodeType = (DSNodeType) SearchTreeEntry.userData;
+            NodeType nodeType = (NodeType) SearchTreeEntry.userData;
             _graphView.AddElement(_graphView.CreateNode(nodeType, context.screenMousePosition, true));
             return true;
         }

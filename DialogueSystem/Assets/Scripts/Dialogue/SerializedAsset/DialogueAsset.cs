@@ -4,7 +4,7 @@ namespace VirtualDeviants.Dialogue.SerializedAsset
 {
     public class DialogueAsset : ScriptableObject
     {
-        [SerializeReference]
+        [SerializeReference, NonReorderable]
         public Node[] nodes;
     }
 }

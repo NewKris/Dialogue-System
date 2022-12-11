@@ -57,7 +57,7 @@ namespace VirtualDeviants.Dialogue.Editor
                     graphSelection: selection)));
         }
 
-        public GraphNode CreateNode(DSNodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
+        public GraphNode CreateNode(NodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
         {
             mousePosition = GetLocalMousePosition(mousePosition, searchWindow);
 
@@ -65,13 +65,13 @@ namespace VirtualDeviants.Dialogue.Editor
 
             switch (nodeType)
             {
-                case DSNodeType.Text:
+                case NodeType.Text:
                     node = new GraphTextNode();
                     break;
-                case DSNodeType.Choice:
+                case NodeType.Choice:
                     node = new GraphChoiceNode();
                     break;
-                case DSNodeType.Exit:
+                case NodeType.Exit:
                     node = new GraphExitNode();
                     break;
                 default:
