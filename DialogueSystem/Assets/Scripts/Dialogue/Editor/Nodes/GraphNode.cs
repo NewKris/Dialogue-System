@@ -14,7 +14,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     Choice
     Effector
         - Display Actor
-        - Change Expression
+        - Play Actor Animation
         - Play SFX
         - Play VFX
         - Show CG

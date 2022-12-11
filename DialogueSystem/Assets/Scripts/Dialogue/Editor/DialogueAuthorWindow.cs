@@ -47,21 +47,21 @@ namespace VirtualDeviants.Dialogue.Editor
             GraphName.AddClasses(ContainerTextField, ContainerElement);
             toolbar.Add(GraphName);
 
-            Button saveButton = ElementUtility.CreateButton("Save", SaveActiveGraph);
+            Button saveButton = ElementUtility.CreateButton("Save Graph", SaveActiveGraph);
             saveButton.AddClasses(ContainerElement, ContainerButton);
             toolbar.Add(saveButton);
 
-            Button loadButton = ElementUtility.CreateButton("Load", LoadGraph);
+            Button loadButton = ElementUtility.CreateButton("Load Graph", LoadGraph);
             loadButton.AddClasses(ContainerElement, ContainerButton);
             toolbar.Add(loadButton);
 
-            Button exportButton = ElementUtility.CreateButton("Export", ExportActiveGraph);
+            Button exportButton = ElementUtility.CreateButton("Export to Asset", ExportActiveGraph);
             exportButton.AddClasses(ContainerElement, ContainerButton);
             toolbar.Add(exportButton);
 
-            Button importButton = ElementUtility.CreateButton("Import", ImportGraph);
+            /*Button importButton = ElementUtility.CreateButton("Import", ImportGraph);
             importButton.AddClasses(ContainerElement, ContainerButton);
-            toolbar.Add(importButton);
+            toolbar.Add(importButton);*/
 
             rootVisualElement.Add(toolbar);
         }
@@ -105,11 +105,6 @@ namespace VirtualDeviants.Dialogue.Editor
 
             string path = SavePath + GraphName.value + ".asset";
             AssetCreator.CreateAsset(path, dialogueAsset);
-        }
-
-        private void ImportGraph()
-        {
-
         }
     }
 }

@@ -12,49 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da03a4c37fa446b4283783617c76a71d, type: 3}
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
-  nodes:
-  - rid: 1575402509462929408
-  - rid: 1575402509462929409
-  - rid: 1575402509462929410
-  - rid: 1575402509462929411
+  nodes: []
   references:
     version: 2
-    RefIds:
-    - rid: 1575402509462929408
-      type: {class: TextNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: fbbaaeb8-f71f-4b66-9d59-9830a9ad62f7
-        outputGuids: []
-        speaker: Speaker
-        text: Text
-    - rid: 1575402509462929409
-      type: {class: TextNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: 9e9fc653-e1ea-47f8-b493-ea236d7a1e69
-        outputGuids: []
-        speaker: Speaker
-        text: Text
-    - rid: 1575402509462929410
-      type: {class: ChoiceNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
-      data:
-        nodeName: Choices
-        guid: 4eb62dde-9451-4646-b7ad-9bad33f4593f
-        outputGuids:
-        - fbbaaeb8-f71f-4b66-9d59-9830a9ad62f7
-        - 9e9fc653-e1ea-47f8-b493-ea236d7a1e69
-        - 9e9fc653-e1ea-47f8-b493-ea236d7a1e69
-        choices:
-        - Choice 1
-        - Choice 2
-        - Choice 3
-    - rid: 1575402509462929411
-      type: {class: TextNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
-      data:
-        nodeName: Dialogue Text
-        guid: f477b713-ab4f-44e5-b0c7-d7b4b3bd7f2c
-        outputGuids:
-        - 4eb62dde-9451-4646-b7ad-9bad33f4593f
-        speaker: Speaker
-        text: Text
+    RefIds: []
