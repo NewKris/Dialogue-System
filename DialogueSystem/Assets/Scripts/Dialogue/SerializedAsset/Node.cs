@@ -6,7 +6,7 @@ namespace VirtualDeviants.Dialogue.SerializedAsset
 	public class Node
 	{
 		public string nodeName;
-		public string guid;
-		public string[] outputGuids;
+		public int guid;
+		public int[] outputGuids;
 	}
 }

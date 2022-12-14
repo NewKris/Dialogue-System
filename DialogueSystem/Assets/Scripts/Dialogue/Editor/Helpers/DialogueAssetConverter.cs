@@ -20,11 +20,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			
 			Dictionary<GraphNode, Node> closedList = new Dictionary<GraphNode, Node>();
 
+			int universalIndex = 0;
+			
 			foreach (UnityEditor.Experimental.GraphView.Node node in graphNodes)
 			{
 				if(node is not GraphNode graphNode) continue;
 
-				MapNode(graphNode, nodes, closedList);
+				MapNode(graphNode, nodes, closedList, ref universalIndex);
 			}
 
 			dialogueAsset.nodes = nodes.ToArray();
@@ -35,14 +37,16 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		private static Node MapNode(
 			GraphNode graphNode, 
 			List<Node> mappedList, 
-			Dictionary<GraphNode, Node> closedList) 
+			Dictionary<GraphNode, Node> closedList,
+			ref int index) 
 		{
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
 			Node node = DialogueNodeConverter.MapData(graphNode);
-			node.guid = Guid.NewGuid().ToString();
+			node.guid = index;
             
 			closedList.Add(graphNode, node);
+			index++;
 
 			List<Node> connected = new List<Node>();
 			foreach (Port output in graphNode.outputContainer.Children().Where(x => x is Port))
@@ -50,7 +54,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 				if(!output.connected) continue;
 
 				GraphNode connection = (GraphNode) output.connections.First().input.parent.parent.parent.parent.parent;
-				connected.Add(MapNode(connection, mappedList, closedList));
+				connected.Add(MapNode(connection, mappedList, closedList, ref index));
 			}
 
 			node.outputGuids = connected.Select(x => x.guid).ToArray();

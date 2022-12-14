@@ -6,6 +6,6 @@ namespace VirtualDeviants.Dialogue.Editor.GraphSaving
 	public class SerializedGroup
 	{
 		public string groupTitle;
-		public string[] groupedNodeGuids;
+		public int[] groupedNodeGuids;
 	}
 }

@@ -7,8 +7,8 @@ namespace VirtualDeviants.Dialogue.Editor.GraphSaving
 	public class SerializedNode
 	{
 		public string nodeName;
-		public string guid;
-		public string[] outputGuids;
+		public int guid;
+		public int[] outputGuids;
 		public Rect nodeRect;
 	}
 }
