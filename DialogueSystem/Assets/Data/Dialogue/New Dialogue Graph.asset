@@ -10,7 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e9aa304d0f64ebcb027d2deeb710c48, type: 3}
-  m_Name: New DialogueGraph
+  m_Name: New Dialogue Graph
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - nodeName: Dialogue Text
+    guid: 1
+    outputGuids: 
+    nodeRect:
+      serializedVersion: 2
+      x: 453
+      y: 97
+      width: 458
+      height: 206
+  - nodeName: Dialogue Text
+    guid: 0
+    outputGuids: 01000000
+    nodeRect:
+      serializedVersion: 2
+      x: -39
+      y: 428
+      width: 458
+      height: 206
   groups: []

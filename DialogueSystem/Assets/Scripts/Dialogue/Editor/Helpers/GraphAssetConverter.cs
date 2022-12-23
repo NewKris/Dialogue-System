@@ -83,7 +83,14 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 
 		public static DialogueGraphView ConvertToGraphView(GraphAsset graphAsset)
 		{
-			throw new NotImplementedException();
+			DialogueGraphView newGraphView = new DialogueGraphView();
+
+			foreach (SerializedNode node in graphAsset.nodes)
+			{
+				
+			}
+			
+			return newGraphView;
 		}
 		
 	}

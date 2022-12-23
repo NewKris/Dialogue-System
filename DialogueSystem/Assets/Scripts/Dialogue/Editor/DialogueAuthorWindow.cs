@@ -22,7 +22,6 @@ namespace VirtualDeviants.Dialogue.Editor
         private const string ContainerButton = "ds-toolbar_button";
 
         private static DialogueGraphView Graph;
-        private static GraphData CurrentlyLoadedGraph;
         private static TextField GraphName;
         
         [MenuItem("Window/Dialogue Author")]
@@ -33,7 +32,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void CreateGUI()
         {
-            AddGraphView();
+            AddGraphView(new DialogueGraphView());
             AddToolbar();
             AddStyles();
         }
@@ -72,9 +71,9 @@ namespace VirtualDeviants.Dialogue.Editor
             rootVisualElement.AddStyleSheets("Dialogue/DSToolbarStyle.uss");
         }
 
-        private void AddGraphView()
+        private void AddGraphView(DialogueGraphView graphView)
         {
-            DialogueGraphView graphView = new DialogueGraphView(this);
+            graphView.AuthorWindow = this;
 
             graphView.StretchToParentSize();
             
@@ -85,15 +84,23 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void SaveActiveGraph()
         {
-
             GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
-            string path = SavePath + GraphName.value + "Graph.asset";
+            string path = SavePath + GraphName.value + " Graph.asset";
             
             AssetCreator.CreateAsset(path, graphAsset);
         }
 
         private void LoadGraph()
         {
+            rootVisualElement.Clear();
+            
+            GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(SavePath + GraphName.value + " Graph.asset");
+            
+            // TODO
+            // Open FileDialog to select GraphAsset
+            
+            AddGraphView(GraphAssetConverter.ConvertToGraphView(graphAsset));
+            AddToolbar();
         }
 
         private void ExportActiveGraph()

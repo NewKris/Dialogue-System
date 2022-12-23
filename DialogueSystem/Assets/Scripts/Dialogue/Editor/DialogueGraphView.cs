@@ -16,14 +16,18 @@ namespace VirtualDeviants.Dialogue.Editor
         private DialogueAuthorWindow _authorWindow;
         private DialogueGraphSearchWindow _searchWindow;
 
-        public DialogueGraphView(DialogueAuthorWindow authorWindow)
+        public DialogueAuthorWindow AuthorWindow
+        {
+            set => _authorWindow = value;
+        }
+        
+        public DialogueGraphView()
         {
             AddSearchWindow();
             AddManipulators();
             AddGridBackground();
 
             AddStyles();
-            _authorWindow = authorWindow;
         }
 
         private void AddSearchWindow()
