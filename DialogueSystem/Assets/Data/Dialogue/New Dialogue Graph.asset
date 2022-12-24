@@ -14,21 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - nodeName: Dialogue Text
-    guid: 1
+    guid: 0
     outputGuids: 
     nodeRect:
       serializedVersion: 2
-      x: 453
-      y: 97
-      width: 458
-      height: 206
-  - nodeName: Dialogue Text
-    guid: 0
-    outputGuids: 01000000
-    nodeRect:
-      serializedVersion: 2
-      x: -39
-      y: 428
-      width: 458
-      height: 206
+      x: 181.33334
+      y: 138.66667
+      width: 460
+      height: 208
   groups: []

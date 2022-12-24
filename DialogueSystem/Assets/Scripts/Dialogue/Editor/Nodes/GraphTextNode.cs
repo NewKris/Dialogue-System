@@ -10,23 +10,16 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class GraphTextNode : GraphNode
     {
 
-        private const string textStyle = "ds-node_text-text";
-        private const string nameStyle = "ds-node_text-name";
-        private const string textContainerStyle = "ds-node_text-container";
-        private const string externalContainerStyle = "ds-node_text-external_container";
+        private const string TextStyle = "ds-node_text-text";
+        private const string NameStyle = "ds-node_text-name";
+        private const string TextContainerStyle = "ds-node_text-container";
+        private const string ExternalContainerStyle = "ds-node_text-external_container";
 
         private TextField _speaker;
         private TextField _text;
 
         public string Speaker => _speaker.value;
         public string Text => _text.value;
-
-        public override void Initialize(Vector2 position)
-        {
-            base.Initialize(position);
-
-            NodeName = "Dialogue Text";
-        }
 
         public override void Draw()
         {
@@ -36,18 +29,18 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             AddOutputPort();
 
             VisualElement customDataContainer = new VisualElement();
-            customDataContainer.AddClasses(textContainerStyle);
+            customDataContainer.AddClasses(TextContainerStyle);
 
             _speaker = ElementUtility.CreateTextField("Speaker");
-            _speaker.AddClasses(nameStyle);
+            _speaker.AddClasses(NameStyle);
 
             _text = ElementUtility.CreateTextArea("Text");
-            _text.AddClasses(textStyle);
+            _text.AddClasses(TextStyle);
 
             customDataContainer.Add(_speaker);
             customDataContainer.Add(_text);
             extensionContainer.Add(customDataContainer);
-            extensionContainer.AddClasses(externalContainerStyle);
+            extensionContainer.AddClasses(ExternalContainerStyle);
 
             RefreshExpandedState();
         }

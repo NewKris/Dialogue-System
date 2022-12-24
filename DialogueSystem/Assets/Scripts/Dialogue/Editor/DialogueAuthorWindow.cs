@@ -14,6 +14,10 @@ namespace VirtualDeviants.Dialogue.Editor
     public class DialogueAuthorWindow : EditorWindow
     {
 
+        // TODO
+        // Align selected Nodes with shortcuts like in PureRef
+        // Support multiple Entry nodes
+
         private const string SavePath = "Assets/Data/Dialogue/";
         private const string DefaultFileName = "New Dialogue";
         private const string ContainerClass = "ds-toolbar_container";

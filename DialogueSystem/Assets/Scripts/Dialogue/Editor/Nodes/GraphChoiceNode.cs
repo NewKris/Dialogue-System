@@ -11,18 +11,16 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class GraphChoiceNode : GraphNode
     {
 
-        private const string deleteButtonStyle = "ds-node_choice-delete_button";
-        private const string addChoiceStyle = "ds-node_choice-add";
-        private const string choiceTextStyle = "ds-node_choice-text";
+        private const string DeleteButtonStyle = "ds-node_choice-delete_button";
+        private const string AddChoiceStyle = "ds-node_choice-add";
+        private const string ChoiceTextStyle = "ds-node_choice-text";
 
         public List<TextField> Choices { get; set; }
 
-        public override void Initialize(Vector2 position)
+        public override void Initialize(Vector2 position, string nodeName = "Node")
         {
+            base.Initialize(position, nodeName);
 
-            base.Initialize(position);
-
-            NodeName = "Choices";
             Choices = new List<TextField>() 
             { 
                 ElementUtility.CreateTextField("Choice 1"),
@@ -37,7 +35,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             AddInputPort();
 
             Button addChoice = ElementUtility.CreateButton("+", AddChoice);
-            addChoice.AddClasses(addChoiceStyle);
+            addChoice.AddClasses(AddChoiceStyle);
             mainContainer.Add(addChoice);
 
             foreach (TextField choice in Choices)
@@ -60,12 +58,12 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private Port CreateChoicePort(TextField choiceName)
         {
-            choiceName.AddClasses(choiceTextStyle);
+            choiceName.AddClasses(ChoiceTextStyle);
 
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
 
             Button deleteChoice = ElementUtility.CreateButton("X", () => DeleteChoice(choiceName, outputPort));
-            deleteChoice.AddClasses(deleteButtonStyle);
+            deleteChoice.AddClasses(DeleteButtonStyle);
 
             outputPort.Add(choiceName);
             outputPort.Add(deleteChoice);

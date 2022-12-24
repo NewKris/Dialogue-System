@@ -10,31 +10,22 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class GraphEntryNode : GraphNode
     {
 
-        private const string containerStyle = "ds-node_entry-title_container";
-        private const string idContainerStyle = "ds-node_entry-id_container";
-        private const string idtextStyle = "ds-node_entry-id";
-
-        public string EntryID { get; set; }
-
-        public override void Initialize(Vector2 position)
-        {
-            base.Initialize(position);
-
-            NodeName = "Start";
-        }
+        private const string ContainerStyle = "ds-node_entry-title_container";
+        private const string IdContainerStyle = "ds-node_entry-id_container";
+        private const string IdTextStyle = "ds-node_entry-id";
 
         public override void Draw()
         {
             base.Draw();
             AddOutputPort();
 
-            titleButtonContainer.AddClasses(containerStyle);
+            titleButtonContainer.AddClasses(ContainerStyle);
 
             VisualElement customContainer = new VisualElement();
             TextField idField = ElementUtility.CreateTextField("ID");
-            idField.AddClasses(idtextStyle);
+            idField.AddClasses(IdTextStyle);
             customContainer.Add(idField);
-            customContainer.AddClasses(idContainerStyle);
+            customContainer.AddClasses(IdContainerStyle);
 
             extensionContainer.Add(customContainer);
         }

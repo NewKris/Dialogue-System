@@ -10,21 +10,14 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class GraphExitNode : GraphNode
     {
 
-        private const string containerStyle = "ds-node_exit-title_container";
-
-        public override void Initialize(Vector2 position)
-        {
-            base.Initialize(position);
-
-            NodeName = "Exit";
-        }
+        private const string ContainerStyle = "ds-node_exit-title_container";
 
         public override void Draw()
         {
             base.Draw();
             AddInputPort();
 
-            titleButtonContainer.AddClasses(containerStyle);
+            titleButtonContainer.AddClasses(ContainerStyle);
         }
 
 
