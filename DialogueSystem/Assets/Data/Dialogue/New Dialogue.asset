@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 8900460320828424192
+  - rid: 8900460320828424193
   references:
     version: 2
     RefIds:
-    - rid: 8900460320828424192
+    - rid: 8900460320828424193
       type: {class: TextNode, ns: VirtualDeviants.Dialogue.SerializedAsset, asm: Assembly-CSharp}
       data:
-        nodeName: Dialogue Text
         guid: 0
         outputGuids: 
-        speaker: Speaker
-        text: Text
+        speaker: Narrator
+        text: Hello!

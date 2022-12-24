@@ -15,11 +15,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			DialogueAsset dialogueAsset = ScriptableObject.CreateInstance<DialogueAsset>();
 			var graphNodes = graph.nodes;
-            
 			List<Node> nodes = new List<Node>();
-			
 			Dictionary<GraphNode, Node> closedList = new Dictionary<GraphNode, Node>();
-
 			int universalIndex = 0;
 			
 			foreach (UnityEditor.Experimental.GraphView.Node node in graphNodes)

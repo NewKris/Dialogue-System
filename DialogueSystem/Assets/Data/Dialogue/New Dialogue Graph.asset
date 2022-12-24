@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: New Dialogue Graph
   m_EditorClassIdentifier: 
   nodes:
-  - nodeName: Dialogue Text
+  - nodeName: WAOW
     guid: 0
     outputGuids: 
     nodeRect:
       serializedVersion: 2
-      x: 181.33334
-      y: 138.66667
+      x: 131.33334
+      y: 152.66667
       width: 460
       height: 208
   groups: []

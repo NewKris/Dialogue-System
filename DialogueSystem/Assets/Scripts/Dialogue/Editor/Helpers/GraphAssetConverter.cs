@@ -10,8 +10,6 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
 	public static class GraphAssetConverter
 	{
-		
-
 		public static GraphAsset ConvertToAsset(DialogueGraphView graph)
 		{
 			GraphAsset asset = ScriptableObject.CreateInstance<GraphAsset>();
