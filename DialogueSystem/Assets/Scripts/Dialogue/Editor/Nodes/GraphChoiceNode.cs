@@ -17,9 +17,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public List<TextField> Choices { get; set; }
 
-        public override void Initialize(Vector2 position, string nodeName = "Node")
+        public override void Initialize(Vector2 position)
         {
-            base.Initialize(position, nodeName);
+            base.Initialize(position);
 
             Choices = new List<TextField>() 
             { 

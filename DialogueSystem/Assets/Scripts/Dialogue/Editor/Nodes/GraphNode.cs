@@ -29,25 +29,16 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
     public abstract class GraphNode : Node
     {
-
-        private const string TitleStyle = "ds-node_title";
         private const string TitleContainerStyle = "ds-node_title_container";
         private const string DragAreaStyle = "ds-node_drag";
 
-        public string NodeName { get; set; }
-
-        public virtual void Initialize(Vector2 position, string nodeName = "Node")
+        public virtual void Initialize(Vector2 position)
         {
             SetPosition(new Rect(position, Vector2.one));
-            NodeName = nodeName;
         }
 
         public virtual void Draw()
         {
-            TextField nodeTitle = ElementUtility.CreateTextField(NodeName);
-            nodeTitle.AddClasses(TitleStyle);
-
-            titleContainer.Insert(0, nodeTitle);
             titleContainer.AddToClassList(TitleContainerStyle);
 
             VisualElement dragArea = new VisualElement();
@@ -66,6 +57,5 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
             outputContainer.Add(outputPort);
         }
-
     }
 }

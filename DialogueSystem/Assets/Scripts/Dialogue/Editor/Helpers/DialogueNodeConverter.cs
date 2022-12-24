@@ -14,7 +14,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			{
 				GraphTextNode textNode => MapToTextNode(textNode),
 				GraphChoiceNode choiceNode => MapToChoiceNode(choiceNode),
-				_ => MapToNode(node)
+				GraphEntryNode entryNode => MapToEntryNode(),
+				_ => MapToExitNode()
 			};
 		}
 		
@@ -22,7 +23,6 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return new TextNode()
 			{
-				nodeName = textNode.NodeName,
 				speaker = textNode.Speaker,
 				text = textNode.Text
 			};
@@ -32,17 +32,18 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return new ChoiceNode()
 			{
-				nodeName = choiceNode.NodeName,
 				choices = choiceNode.Choices.Select(x => x.value).ToArray()
 			};
 		}
 		
-		private static Node MapToNode(GraphNode entryNode)
+		private static EntryNode MapToEntryNode()
 		{
-			return new Node()
-			{
-				nodeName = entryNode.NodeName
-			};
+			return new EntryNode();
+		}
+
+		private static ExitNode MapToExitNode()
+		{
+			return new ExitNode();
 		}
 
 	}
