@@ -4,7 +4,7 @@ using VirtualDeviants.Dialogue.Editor.Nodes;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
-	public static class GraphNodeConverter
+	public static class GraphNodeToSerializedNodeConverter
 	{
 		public static SerializedNode MapData(GraphNode node)
 		{
@@ -12,8 +12,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			{
 				GraphTextNode textNode => MapToTextNode(textNode),
 				GraphChoiceNode choiceNode => MapToChoiceNode(choiceNode),
-				GraphEntryNode entryNode => MapToEntryNode(),
-				_ => MapToExitNode()
+				GraphEntryNode entryNode => MapToEntryNode(entryNode),
+				_ => MapToExitNode(node)
 			};
 		}
 
@@ -21,6 +21,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return new SerializedChoiceNode()
 			{
+				nodeName = choiceNode.NodeName,
 				choices = choiceNode.Choices.Select(x => x.value).ToArray()
 			};
 		}
@@ -29,19 +30,20 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return new SerializedTextNode()
 			{
+				nodeName = textNode.NodeName,
 				speaker = textNode.Speaker,
 				text = textNode.Text
 			};
 		}
 		
-		private static SerializedEntryNode MapToEntryNode()
+		private static SerializedEntryNode MapToEntryNode(GraphEntryNode entryNode)
 		{
-			return new SerializedEntryNode();
+			return new SerializedEntryNode() { nodeName = entryNode.NodeName };
 		}
 
-		private static SerializedExitNode MapToExitNode()
+		private static SerializedExitNode MapToExitNode(GraphNode graphNode)
 		{
-			return new SerializedExitNode();
+			return new SerializedExitNode() { nodeName = graphNode.NodeName };
 		}
 	}
 }

@@ -42,7 +42,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
-			Node node = DialogueNodeConverter.MapData(graphNode);
+			Node node = GraphNodeToDialogueNodeConverter.MapData(graphNode);
 			node.guid = index;
             
 			closedList.Add(graphNode, node);

@@ -5,7 +5,7 @@ using VirtualDeviants.Dialogue.SerializedAsset;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
-	public static class DialogueNodeConverter
+	public static class GraphNodeToDialogueNodeConverter
 	{
 
 		public static Node MapData(GraphNode node)

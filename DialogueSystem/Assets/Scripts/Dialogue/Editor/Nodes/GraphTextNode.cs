@@ -25,6 +25,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         {
             base.Draw();
 
+            AddTitle("Dialogue Text");
             AddInputPort();
             AddOutputPort();
 

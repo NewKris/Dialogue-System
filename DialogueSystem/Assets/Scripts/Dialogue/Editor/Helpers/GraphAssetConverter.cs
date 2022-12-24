@@ -59,7 +59,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
-			SerializedNode node = GraphNodeConverter.MapData(graphNode);
+			SerializedNode node = GraphNodeToSerializedNodeConverter.MapData(graphNode);
 			node.guid = index;
 			node.nodeRect = graphNode.GetPosition();
 
