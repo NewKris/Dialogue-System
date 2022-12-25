@@ -12,7 +12,7 @@ namespace VirtualDeviants.Dialogue.Editor
         private DialogueGraphView _graphView;
         private Texture2D _indent;
 
-        List<SearchTreeEntry> searchEntries;
+        private List<SearchTreeEntry> _searchEntries;
 
         public void Initialize(DialogueGraphView graphView)
         {
@@ -22,7 +22,7 @@ namespace VirtualDeviants.Dialogue.Editor
             _indent.SetPixel(0, 0, Color.clear);
             _indent.Apply();
 
-            searchEntries = new List<SearchTreeEntry>()
+            _searchEntries = new List<SearchTreeEntry>()
             {
                 new SearchTreeGroupEntry(new GUIContent("Create Node")),
                 new SearchTreeEntry(new GUIContent("Text", _indent)) {level = 1, userData = NodeType.Text},
@@ -38,12 +38,12 @@ namespace VirtualDeviants.Dialogue.Editor
 
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            return searchEntries;
+            return _searchEntries;
         }
 
-        public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
         {
-            NodeType nodeType = (NodeType) SearchTreeEntry.userData;
+            NodeType nodeType = (NodeType) searchTreeEntry.userData;
             _graphView.AddElement(_graphView.CreateNode(nodeType, context.screenMousePosition, true));
             return true;
         }
