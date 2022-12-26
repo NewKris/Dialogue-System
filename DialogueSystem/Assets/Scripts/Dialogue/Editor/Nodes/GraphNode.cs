@@ -39,18 +39,21 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public string NodeName => _titleField.value;
 
-        public GraphNode(string nodeName) : base()
+        public Vector2 Position
+        {
+            get => GetPosition().position;
+            set => SetPosition(new Rect(value, Vector2.one));
+        }
+
+        public GraphNode(string nodeName = "Node") : base()
         {
             this.nodeName = nodeName;
         }
-        
-        public virtual void Initialize(Vector2 position)
-        {
-            SetPosition(new Rect(position, Vector2.one));
-        }
 
-        public virtual void Draw()
+        public virtual void Draw(Vector2 position)
         {
+            Position = position;
+            
             AddTitle(nodeName);
             titleContainer.AddToClassList(TitleContainerStyle);
 

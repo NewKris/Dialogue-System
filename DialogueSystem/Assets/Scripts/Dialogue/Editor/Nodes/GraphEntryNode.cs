@@ -16,9 +16,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public GraphEntryNode(string nodeName = "Start") : base(nodeName){}
         
-        public override void Draw()
+        public override void Draw(Vector2 position)
         {
-            base.Draw();
+            base.Draw(position);
             AddOutputPort();
 
             titleButtonContainer.AddClasses(ContainerStyle);

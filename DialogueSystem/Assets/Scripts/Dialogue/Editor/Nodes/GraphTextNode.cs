@@ -31,9 +31,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             _text = text;
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 position)
         {
-            base.Draw();
+            base.Draw(position);
 
             AddInputPort();
             AddOutputPort();

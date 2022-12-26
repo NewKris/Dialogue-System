@@ -9,6 +9,6 @@ namespace VirtualDeviants.Dialogue.Editor.GraphSaving
 		public string nodeName;
 		public int guid;
 		public int[] outputGuids;
-		public Rect nodeRect;
+		public Vector2 position;
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Nodes;
 
@@ -58,11 +59,9 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
 			SerializedNode node = GraphNodeToSerializedNodeConverter.MapData(graphNode);
-			node.guid = index;
-			node.nodeRect = graphNode.GetPosition();
+			node.position = graphNode.Position;
 
 			closedList.Add(graphNode, node);
-			index++;
 
 			List<SerializedNode> connected = new List<SerializedNode>();
 			foreach (Port output in graphNode.outputContainer.Children().Where(x => x is Port))
@@ -74,8 +73,10 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			}
 
 			node.outputGuids = connected.Select(x => x.guid).ToArray();
-            
+
+			node.guid = index;
 			mappedList.Add(node);
+			index++;
 			return node;
 		}
 
@@ -83,13 +84,36 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			DialogueGraphView newGraphView = new DialogueGraphView();
 
+			List<GraphNode> placedNodes = new List<GraphNode>();
+
 			foreach (SerializedNode node in graphAsset.nodes)
 			{
+				GraphNode graphNode = SerializedNodeToGraphNodeConverter.MapData(node);
+				graphNode.Draw(node.position);
+				newGraphView.AddElement(graphNode);
 				
+				placedNodes.Add(graphNode);
+			}
+
+			for (int i = 0; i < graphAsset.nodes.Count; i++)
+			{
+				GraphNode current = placedNodes[i];
+				
+				Port[] outputs = Array.ConvertAll(
+					current.outputContainer.Children().Where(child => child is Port).ToArray(), 
+					output => (Port) output
+				);
+				
+				for (int j = 0; j < outputs.Count(); j++)
+				{
+					Port destination = placedNodes[graphAsset.nodes[i].outputGuids[j]].inputContainer.Children()
+						.First(input => input is Port) as Port;
+					
+					newGraphView.CreateConnection(outputs[j], destination);
+				}
 			}
 			
 			return newGraphView;
 		}
-		
 	}
 }

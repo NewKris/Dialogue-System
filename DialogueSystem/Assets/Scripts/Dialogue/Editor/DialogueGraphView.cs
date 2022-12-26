@@ -83,8 +83,7 @@ namespace VirtualDeviants.Dialogue.Editor
                     break;
             }
 
-            node.Initialize(mousePosition);
-            node.Draw();
+            node.Draw(mousePosition);
 
             return node;
         }
@@ -102,6 +101,12 @@ namespace VirtualDeviants.Dialogue.Editor
             });
 
             return compatiblePorts;
+        }
+
+        public void CreateConnection(Port from, Port to)
+        {
+            Edge edge = from.ConnectTo(to);
+            AddElement(edge);
         }
 
         private IManipulator CreateNodeContextualMenu()
@@ -135,6 +140,5 @@ namespace VirtualDeviants.Dialogue.Editor
 
             return localPosition;
         }
-
     }
 }

@@ -5,7 +5,7 @@ namespace VirtualDeviants.Dialogue.Editor.GraphSaving
 {
 	public class GraphAsset : ScriptableObject
 	{
-		[NonReorderable]
+		[NonReorderable, SerializeReference]
 		public List<SerializedNode> nodes;
 		[NonReorderable]
 		public List<SerializedGroup> groups;
