@@ -13,13 +13,58 @@ MonoBehaviour:
   m_Name: New Dialogue Graph
   m_EditorClassIdentifier: 
   nodes:
-  - nodeName: WAOW
-    guid: 0
+  - nodeName: Exit
+    guid: 4
     outputGuids: 
     nodeRect:
       serializedVersion: 2
-      x: 131.33334
-      y: 152.66667
-      width: 460
-      height: 208
+      x: 1442
+      y: 58
+      width: 92
+      height: 92
+  - nodeName: Dialogue Node
+    guid: 3
+    outputGuids: 04000000
+    nodeRect:
+      serializedVersion: 2
+      x: 942
+      y: 58
+      width: 458
+      height: 206
+  - nodeName: Dialogue Node
+    guid: 5
+    outputGuids: 04000000
+    nodeRect:
+      serializedVersion: 2
+      x: 942
+      y: 313
+      width: 458
+      height: 206
+  - nodeName: Choice Node
+    guid: 2
+    outputGuids: 0300000005000000
+    nodeRect:
+      serializedVersion: 2
+      x: 745
+      y: 161
+      width: 170
+      height: 152
+  - nodeName: Dialogue Node
+    guid: 1
+    outputGuids: 02000000
+    nodeRect:
+      serializedVersion: 2
+      x: 160
+      y: 161
+      width: 458
+      height: 206
+  - nodeName: Start
+    guid: 0
+    outputGuids: 01000000
+    nodeRect:
+      serializedVersion: 2
+      x: -44
+      y: 161
+      width: 102
+      height: 92
   groups: []

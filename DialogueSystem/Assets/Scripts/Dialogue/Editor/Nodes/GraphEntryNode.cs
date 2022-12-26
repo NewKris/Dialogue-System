@@ -14,6 +14,8 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private const string IdContainerStyle = "ds-node_entry-id_container";
         private const string IdTextStyle = "ds-node_entry-id";
 
+        public GraphEntryNode(string nodeName = "Start") : base(nodeName){}
+        
         public override void Draw()
         {
             base.Draw();

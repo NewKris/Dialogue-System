@@ -32,7 +32,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return new ChoiceNode()
 			{
-				choices = choiceNode.Choices.Select(x => x.value).ToArray()
+				choices = choiceNode.Choices
 			};
 		}
 		

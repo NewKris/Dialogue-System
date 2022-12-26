@@ -33,9 +33,16 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private const string TitleContainerStyle = "ds-node_title_container";
         private const string DragAreaStyle = "ds-node_drag";
 
+        public string nodeName;
+
         private TextField _titleField;
 
         public string NodeName => _titleField.value;
+
+        public GraphNode(string nodeName) : base()
+        {
+            this.nodeName = nodeName;
+        }
         
         public virtual void Initialize(Vector2 position)
         {
@@ -44,6 +51,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public virtual void Draw()
         {
+            AddTitle(nodeName);
             titleContainer.AddToClassList(TitleContainerStyle);
 
             VisualElement dragArea = new VisualElement();

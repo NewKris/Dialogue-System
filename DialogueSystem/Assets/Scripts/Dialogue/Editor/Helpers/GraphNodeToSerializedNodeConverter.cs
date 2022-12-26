@@ -22,7 +22,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			return new SerializedChoiceNode()
 			{
 				nodeName = choiceNode.NodeName,
-				choices = choiceNode.Choices.Select(x => x.value).ToArray()
+				choices = choiceNode.Choices
 			};
 		}
 

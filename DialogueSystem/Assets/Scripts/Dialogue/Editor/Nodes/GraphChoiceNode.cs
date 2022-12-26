@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,15 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private const string AddChoiceStyle = "ds-node_choice-add";
         private const string ChoiceTextStyle = "ds-node_choice-text";
 
-        public List<TextField> Choices { get; set; }
+        private readonly List<TextField> _choices;
 
-        public override void Initialize(Vector2 position)
+        public string[] Choices => Array.ConvertAll(_choices.ToArray(), choice => choice.value);
+
+        public GraphChoiceNode(string[] choices = null, string nodeName = "Choice Node") 
+            : base(nodeName)
         {
-            base.Initialize(position);
-
-            Choices = new List<TextField>() 
-            { 
-                ElementUtility.CreateTextField("Choice 1"),
-                ElementUtility.CreateTextField("Choice 2")
-            };
+            choices ??= new[] {"Choice 1", "Choice 2"};
+            _choices = Array.ConvertAll(choices, choice => ElementUtility.CreateTextField(choice)).ToList();
         }
 
         public override void Draw()
@@ -38,7 +37,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             addChoice.AddClasses(AddChoiceStyle);
             mainContainer.Add(addChoice);
 
-            foreach (TextField choice in Choices)
+            foreach (TextField choice in _choices)
             {
                 Port outputPort = CreateChoicePort(choice);
                 outputContainer.Add(outputPort);
@@ -49,9 +48,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private void AddChoice()
         {
-            string newChoiceName = "Choice " + (Choices.Count + 1);
+            string newChoiceName = "Choice " + (_choices.Count + 1);
             TextField choiceText = ElementUtility.CreateTextField(newChoiceName);
-            Choices.Add(choiceText);
+            _choices.Add(choiceText);
 
             outputContainer.Add(CreateChoicePort(choiceText));
         }
@@ -73,9 +72,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private void DeleteChoice(TextField choiceName, Port targetPort)
         {
-            if (Choices.Count <= 1) return;
+            if (_choices.Count <= 1) return;
 
-            Choices.Remove(choiceName);
+            _choices.Remove(choiceName);
             
             if(targetPort.connected)
                 targetPort.connections.First().RemoveFromHierarchy();

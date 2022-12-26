@@ -12,6 +12,8 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private const string ContainerStyle = "ds-node_exit-title_container";
 
+        public GraphExitNode(string nodeName = "Exit") : base(nodeName){}
+        
         public override void Draw()
         {
             base.Draw();
