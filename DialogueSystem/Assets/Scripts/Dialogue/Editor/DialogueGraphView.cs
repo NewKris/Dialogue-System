@@ -55,10 +55,8 @@ namespace VirtualDeviants.Dialogue.Editor
         private void AddMenuEvents(ContextualMenuPopulateEvent menuEvents)
         {
             menuEvents.menu.AppendAction("Create Group", x => 
-                AddElement(ElementUtility.CreateGroup(
-                    groupName: "Dialogue Group", 
-                    mousePosition: GetLocalMousePosition(x.eventInfo.localMousePosition), 
-                    graphSelection: selection)));
+                AddElement(ElementUtility.CreateGroup("Dialogue Group", selection))
+            );
         }
 
         public GraphNode CreateNode(NodeType nodeType, Vector2 mousePosition, bool searchWindow = false)
@@ -107,6 +105,15 @@ namespace VirtualDeviants.Dialogue.Editor
         {
             Edge edge = from.ConnectTo(to);
             AddElement(edge);
+        }
+
+        public void LoadGroup(string groupName, GraphNode[] children)
+        {
+            selection.Clear();
+            foreach (GraphNode child in children)
+                selection.Add(child);
+            
+            AddElement(ElementUtility.CreateGroup(groupName, selection));
         }
 
         private IManipulator CreateNodeContextualMenu()

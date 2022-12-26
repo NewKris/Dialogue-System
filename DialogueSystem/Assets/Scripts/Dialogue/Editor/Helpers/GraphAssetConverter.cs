@@ -112,6 +112,12 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 					newGraphView.CreateConnection(outputs[j], destination);
 				}
 			}
+
+			foreach (SerializedGroup group in graphAsset.groups)
+			{
+				GraphNode[] children = Array.ConvertAll(group.groupedNodeGuids, child => placedNodes[child]);
+				newGraphView.LoadGroup(group.groupTitle, children);
+			}
 			
 			return newGraphView;
 		}

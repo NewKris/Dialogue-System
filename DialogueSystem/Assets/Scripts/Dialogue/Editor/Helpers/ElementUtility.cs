@@ -10,14 +10,14 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
     public static class ElementUtility
     {
-        public static Group CreateGroup(string groupName, Vector2 mousePosition, List<ISelectable> graphSelection)
+        public static Group CreateGroup(string groupName, List<ISelectable> graphSelection)
         {
             Group group = new Group()
             {
                 title = groupName,
             };
 
-            group.SetPosition(new Rect(mousePosition, Vector2.one));
+            group.SetPosition(new Rect(Vector2.zero, Vector2.one));
 
             foreach (GraphElement selectedElement in graphSelection)
             {
