@@ -67,13 +67,13 @@ namespace VirtualDeviants.Dialogue.Editor
 
             switch (nodeType)
             {
-                case NodeType.Text:
+                case NodeType.TEXT:
                     node = new GraphTextNode();
                     break;
-                case NodeType.Choice:
+                case NodeType.CHOICE:
                     node = new GraphChoiceNode();
                     break;
-                case NodeType.Exit:
+                case NodeType.EXIT:
                     node = new GraphExitNode();
                     break;
                 default:

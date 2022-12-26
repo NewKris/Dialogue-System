@@ -6,9 +6,9 @@ namespace VirtualDeviants.Dialogue.Enumerations
 {
     public enum NodeType
     {
-        Text,
-        Choice,
-        Entry,
-        Exit
+        TEXT,
+        CHOICE,
+        ENTRY,
+        EXIT
     }
 }
