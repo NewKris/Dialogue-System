@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VirtualDeviants.Dialogue.SerializedAsset
+namespace VirtualDeviants.Dialogue.RuntimeAsset
 {
     public class DialogueAsset : ScriptableObject
     {

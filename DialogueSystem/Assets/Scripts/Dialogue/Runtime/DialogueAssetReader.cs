@@ -1,4 +1,4 @@
-﻿using VirtualDeviants.Dialogue.SerializedAsset;
+﻿using VirtualDeviants.Dialogue.RuntimeAsset;
 
 namespace VirtualDeviants.Dialogue.Runtime
 {

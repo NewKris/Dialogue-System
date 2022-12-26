@@ -4,8 +4,8 @@ using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using VirtualDeviants.Dialogue.Editor.Nodes;
-using VirtualDeviants.Dialogue.SerializedAsset;
-using Node = VirtualDeviants.Dialogue.SerializedAsset.Node;
+using VirtualDeviants.Dialogue.RuntimeAsset;
+using Node = VirtualDeviants.Dialogue.RuntimeAsset.Node;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {

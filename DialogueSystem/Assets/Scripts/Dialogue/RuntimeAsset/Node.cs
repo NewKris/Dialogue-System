@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VirtualDeviants.Dialogue.SerializedAsset
+namespace VirtualDeviants.Dialogue.RuntimeAsset
 {
 	[Serializable]
 	public class Node

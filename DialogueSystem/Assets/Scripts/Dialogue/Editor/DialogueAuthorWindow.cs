@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Helpers;
-using VirtualDeviants.Dialogue.SerializedAsset;
-using Node = VirtualDeviants.Dialogue.SerializedAsset.Node;
+using VirtualDeviants.Dialogue.RuntimeAsset;
+using Node = VirtualDeviants.Dialogue.RuntimeAsset.Node;
 
 namespace VirtualDeviants.Dialogue.Editor
 {

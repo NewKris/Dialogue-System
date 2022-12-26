@@ -2,7 +2,6 @@
 using System.IO;
 using UnityEditor;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
-using VirtualDeviants.Dialogue.SerializedAsset;
 using Object = UnityEngine.Object;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Nodes;
-using VirtualDeviants.Dialogue.SerializedAsset;
+using VirtualDeviants.Dialogue.RuntimeAsset;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
