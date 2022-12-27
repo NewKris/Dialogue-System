@@ -27,7 +27,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private static DialogueGraphView Graph;
         private static TextField GraphName;
-        
+
         [MenuItem("Window/Dialogue Author")]
         public static void OpenWindow()
         {
@@ -41,6 +41,38 @@ namespace VirtualDeviants.Dialogue.Editor
             AddStyles();
         }
 
+        private void OnEnable()
+        {
+            rootVisualElement.RegisterCallback<KeyDownEvent>(OnSave, TrickleDown.TrickleDown);
+            rootVisualElement.RegisterCallback<KeyDownEvent>(OnAlignHorizontal, TrickleDown.TrickleDown);
+            rootVisualElement.RegisterCallback<KeyDownEvent>(OnAlignVertical, TrickleDown.TrickleDown);
+        }
+
+        private void OnDisable()
+        {
+            rootVisualElement.UnregisterCallback<KeyDownEvent>(OnSave);
+            rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignHorizontal);
+            rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignVertical);
+        }
+
+        private void OnSave(KeyDownEvent keyDownEvent)
+        {
+            if(keyDownEvent.keyCode == KeyCode.S && keyDownEvent.modifiers == EventModifiers.Control)
+                SaveActiveGraph();
+        }
+
+        private void OnAlignVertical(KeyDownEvent keyDownEvent)
+        {
+            if (keyDownEvent.keyCode == KeyCode.V && keyDownEvent.modifiers == EventModifiers.Control)
+                Graph?.AlignVertical();
+        }
+
+        private void OnAlignHorizontal(KeyDownEvent keyDownEvent)
+        {
+            if(keyDownEvent.keyCode == KeyCode.H && keyDownEvent.modifiers == EventModifiers.Control)
+                Graph?.AlignHorizontal();
+        }
+        
         private void AddToolbar(string graphName)
         {
             Toolbar toolbar = new Toolbar();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -114,6 +115,44 @@ namespace VirtualDeviants.Dialogue.Editor
                 selection.Add(child);
             
             AddElement(ElementUtility.CreateGroup(groupName, selection));
+        }
+
+        public void AlignHorizontal()
+        {
+            List<GraphNode> nodesToAlign = selection
+                .Where(node => node is GraphNode)
+                .Cast<GraphNode>()
+                .OrderBy(node => node.Position.x)
+                .ToList();
+
+            if(nodesToAlign.Count == 0) return;
+
+            Vector2 pivot = nodesToAlign[0].Position;
+            
+            foreach (GraphNode node in nodesToAlign)
+            {
+                node.Position = pivot;
+                pivot.x += node.contentRect.width;
+            }
+        }
+
+        public void AlignVertical()
+        {
+            List<GraphNode> nodesToAlign = selection
+                .Where(node => node is GraphNode)
+                .Cast<GraphNode>()
+                .OrderBy(node => node.Position.y)
+                .ToList();
+
+            if(nodesToAlign.Count == 0) return;
+
+            Vector2 pivot = nodesToAlign[0].Position;
+            
+            foreach (GraphNode node in nodesToAlign)
+            {
+                node.Position = pivot;
+                pivot.y += node.contentRect.height;
+            }
         }
 
         private IManipulator CreateNodeContextualMenu()
