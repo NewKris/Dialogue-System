@@ -1,13 +1,12 @@
+using System;
 using System.IO;
-using System.Xml.Serialization;
-using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using UnityEngine;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.RuntimeAsset;
-using Node = VirtualDeviants.Dialogue.RuntimeAsset.Node;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
@@ -18,7 +17,6 @@ namespace VirtualDeviants.Dialogue.Editor
         // Align selected Nodes with shortcuts like in PureRef
         // Support multiple Entry nodes
 
-        private const string SavePath = "Assets/Data/Dialogue/";
         private const string DefaultFileName = "New Dialogue";
         private const string ContainerClass = "ds-toolbar_container";
         private const string ContainerElement = "ds-toolbar_element";
@@ -62,10 +60,6 @@ namespace VirtualDeviants.Dialogue.Editor
             exportButton.AddClasses(ContainerElement, ContainerButton);
             toolbar.Add(exportButton);
 
-            /*Button importButton = ElementUtility.CreateButton("Import", ImportGraph);
-            importButton.AddClasses(ContainerElement, ContainerButton);
-            toolbar.Add(importButton);*/
-
             rootVisualElement.Add(toolbar);
         }
 
@@ -88,34 +82,64 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void SaveActiveGraph()
         {
-            GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
-            string path = SavePath + GraphName.value + " Graph.asset";
+            string savePath = EditorUtility.OpenFolderPanel("Save Graph Asset", Application.dataPath, "Name");
             
-            AssetCreator.CreateAsset(path, graphAsset);
+            if(string.IsNullOrEmpty(savePath)) return;
+
+            savePath = ToLocalPath(savePath) + "/" + GraphName.value + ".asset";
+
+            if (File.Exists(savePath))
+            {
+                if(!EditorUtility.DisplayDialog("Save Graph", "The file already exists in this folder. Do you want to overwrite it?", "Yes", "No"))
+                    return;
+            }
+            
+            GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
+            AssetCreator.CreateAsset(savePath, graphAsset);
         }
 
         private void LoadGraph()
         {
+            string selectedFile = EditorUtility.OpenFilePanel("Load Graph Asset", Application.dataPath, "asset");
+
+            if (string.IsNullOrEmpty(selectedFile)) return;
+
+            selectedFile = ToLocalPath(selectedFile);
+            GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(selectedFile);
+
+            if (graphAsset == null)
+            {
+                EditorUtility.DisplayDialog("Load Graph", "Invalid file selected! File must be of type GraphAsset.", "Close");
+                return;
+            }
+
             rootVisualElement.Clear();
-            
-            GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(SavePath + GraphName.value + " Graph.asset");
-            
-            // TODO
-            // Open FileDialog to select GraphAsset
-            
             AddGraphView(GraphAssetConverter.ConvertToGraphView(graphAsset));
             AddToolbar();
         }
 
         private void ExportActiveGraph()
         {
+            string exportPath = EditorUtility.OpenFolderPanel("Save Graph Asset", Application.dataPath, "Name");
+            
+            if(string.IsNullOrEmpty(exportPath)) return;
+            
+            exportPath = ToLocalPath(exportPath) + "/" + GraphName.value + ".asset";
+
+            if (File.Exists(exportPath))
+            {
+                if(!EditorUtility.DisplayDialog("Export Graph", "The file already exists in this folder. Do you want to overwrite it?", "Yes", "No"))
+                    return;
+            }
+            
             DialogueAsset dialogueAsset = DialogueAssetConverter.ConvertToAsset(Graph);
             
-            // TODO
-            // Open the FileDialog to select a save location
+            AssetCreator.CreateAsset(exportPath, dialogueAsset);
+        }
 
-            string path = SavePath + GraphName.value + ".asset";
-            AssetCreator.CreateAsset(path, dialogueAsset);
+        private string ToLocalPath(string absolutePath)
+        {
+            return absolutePath.Substring(absolutePath.LastIndexOf("Assets/", StringComparison.Ordinal));
         }
     }
 }
