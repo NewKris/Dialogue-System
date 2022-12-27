@@ -16,6 +16,8 @@ namespace VirtualDeviants.Dialogue.Editor
         // TODO
         // Align selected Nodes with shortcuts like in PureRef
         // Support multiple Entry nodes
+        // Use a common NodeData struct for each node class
+        // Variables
 
         private const string DefaultFileName = "New Dialogue";
         private const string ContainerClass = "ds-toolbar_container";
@@ -35,16 +37,16 @@ namespace VirtualDeviants.Dialogue.Editor
         private void CreateGUI()
         {
             AddGraphView(new DialogueGraphView());
-            AddToolbar();
+            AddToolbar(DefaultFileName);
             AddStyles();
         }
 
-        private void AddToolbar()
+        private void AddToolbar(string graphName)
         {
             Toolbar toolbar = new Toolbar();
             toolbar.AddClasses(ContainerClass);
 
-            GraphName = ElementUtility.CreateTextField(DefaultFileName);
+            GraphName = ElementUtility.CreateTextField(graphName);
             GraphName.AddClasses(ContainerTextField, ContainerElement);
             toolbar.Add(GraphName);
 
@@ -115,7 +117,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
             rootVisualElement.Clear();
             AddGraphView(GraphAssetConverter.ConvertToGraphView(graphAsset));
-            AddToolbar();
+            AddToolbar(graphAsset.name);
         }
 
         private void ExportActiveGraph()
