@@ -66,7 +66,11 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			List<SerializedNode> connected = new List<SerializedNode>();
 			foreach (Port output in graphNode.outputContainer.Children().Where(x => x is Port))
 			{
-				if(!output.connected) continue;
+				if (!output.connected)
+				{
+					connected.Add(new DummyNode(){guid = -1});
+					continue;
+				}
 
 				GraphNode connection = (GraphNode) output.connections.First().input.parent.parent.parent.parent.parent;
 				connected.Add(MapNode(connection, mappedList, closedList, ref index));
@@ -106,6 +110,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 				
 				for (int j = 0; j < outputs.Count(); j++)
 				{
+					if(graphAsset.nodes[i].outputGuids[j] == -1) continue;
+					
 					Port destination = placedNodes[graphAsset.nodes[i].outputGuids[j]].inputContainer.Children()
 						.First(input => input is Port) as Port;
 					
