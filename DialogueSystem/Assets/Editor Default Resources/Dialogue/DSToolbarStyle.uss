@@ -9,11 +9,13 @@
 	height: 75%;
 }
 
-.ds-toolbar_textfield > .unity-text-field__input {
+.ds-toolbar_text {
 	height: 30px;
 	padding: 0;
 	padding-left: 10px;
 	padding-right: 10px;
+	-unity-text-align: middle-center;
+	-unity-font-style: bold;
 }
 
 .ds-toolbar_button {

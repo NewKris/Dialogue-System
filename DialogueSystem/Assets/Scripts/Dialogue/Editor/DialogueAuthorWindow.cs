@@ -14,20 +14,20 @@ namespace VirtualDeviants.Dialogue.Editor
     {
 
         // TODO
-        // Align selected Nodes with shortcuts like in PureRef
         // Support multiple Entry nodes
         // Use a common NodeData struct for each node class
         // Variables
+        // Confirm before discarding unsaved changes
 
         private const string DefaultFileName = "New Dialogue";
         private const string ContainerClass = "ds-toolbar_container";
         private const string ContainerElement = "ds-toolbar_element";
-        private const string ContainerTextField = "ds-toolbar_textfield";
+        private const string ContainerText = "ds-toolbar_text";
         private const string ContainerButton = "ds-toolbar_button";
 
         private static string LoadedPath;
         private static DialogueGraphView Graph;
-        private static TextField GraphName;
+        private static Label GraphName;
 
         [MenuItem("Window/Dialogue Author")]
         public static void OpenWindow()
@@ -37,9 +37,9 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void CreateGUI()
         {
-            DrawGraphView();
-            AddToolbar(DefaultFileName);
+            AddToolbar();
             AddStyles();
+            DrawGraphView();
         }
 
         private void OnEnable()
@@ -74,20 +74,19 @@ namespace VirtualDeviants.Dialogue.Editor
                 Graph?.AlignHorizontal();
         }
         
-        private void AddToolbar(string graphName)
+        private void AddToolbar()
         {
             Toolbar toolbar = new Toolbar();
             toolbar.AddClasses(ContainerClass);
 
-            GraphName = ElementUtility.CreateTextField(graphName);
-            GraphName.AddClasses(ContainerTextField, ContainerElement);
+            GraphName = ElementUtility.CreateLabel();
+            GraphName.AddClasses(ContainerElement, ContainerText);
             toolbar.Add(GraphName);
             
             Button[] buttons = {
                 ElementUtility.CreateButton("Save Graph", SaveActiveGraph),
                 ElementUtility.CreateButton("Load Graph", LoadGraphAsset),
                 ElementUtility.CreateButton("Export to Asset", ExportActiveGraph),
-                ElementUtility.CreateButton("Create New Graph", CreateNewGraph)
             };
 
             foreach (Button button in buttons)
@@ -115,7 +114,7 @@ namespace VirtualDeviants.Dialogue.Editor
             Graph = LoadGraph(LoadedPath);
             
             if (Graph == null) return;
-            
+
             Graph.AuthorWindow = this;
             Graph.StretchToParentSize();
 
@@ -141,7 +140,7 @@ namespace VirtualDeviants.Dialogue.Editor
             DrawGraphView();
         }
 
-        private DialogueGraphView LoadGraph(string path)
+        private static DialogueGraphView LoadGraph(string path)
         {
             GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(path);
 
@@ -151,7 +150,7 @@ namespace VirtualDeviants.Dialogue.Editor
                 return null;
             }
             
-            LoadedPath = path;
+            GraphName.text = graphAsset.name;
             return GraphAssetConverter.ConvertToGraphView(graphAsset);
         }
         
@@ -163,7 +162,7 @@ namespace VirtualDeviants.Dialogue.Editor
             
             if(string.IsNullOrEmpty(exportPath)) return;
             
-            exportPath = ToLocalPath(exportPath) + "/" + GraphName.value + ".asset";
+            exportPath = ToLocalPath(exportPath) + "/" + GraphName.text + ".asset";
 
             if (File.Exists(exportPath))
             {
@@ -174,11 +173,6 @@ namespace VirtualDeviants.Dialogue.Editor
             DialogueAsset dialogueAsset = DialogueAssetConverter.ConvertToAsset(Graph);
             
             AssetCreator.CreateAsset(exportPath, dialogueAsset);
-        }
-
-        private void CreateNewGraph()
-        {
-            
         }
 
         private static string ToLocalPath(string absolutePath)

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace VirtualDeviants.Dialogue.Editor.GraphSaving
 {
+	[CreateAssetMenu(menuName = "Dialogue Graph", fileName = "New Graph")]
 	public class GraphAsset : ScriptableObject
 	{
 		[NonReorderable, SerializeReference]
