@@ -25,7 +25,7 @@ namespace VirtualDeviants.Dialogue.Editor
         private const string ContainerTextField = "ds-toolbar_textfield";
         private const string ContainerButton = "ds-toolbar_button";
 
-        private static string _loadedPath;
+        private static string LoadedPath;
         private static DialogueGraphView Graph;
         private static TextField GraphName;
 
@@ -110,9 +110,12 @@ namespace VirtualDeviants.Dialogue.Editor
             if(rootVisualElement.Contains(Graph))
                 rootVisualElement.Remove(Graph);
 
-            if(string.IsNullOrEmpty(_loadedPath)) return;
+            if(string.IsNullOrEmpty(LoadedPath)) return;
             
-            Graph = LoadGraph(_loadedPath);
+            Graph = LoadGraph(LoadedPath);
+            
+            if (Graph == null) return;
+            
             Graph.AuthorWindow = this;
             Graph.StretchToParentSize();
 
@@ -121,10 +124,10 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void SaveActiveGraph()
         {
-            if(string.IsNullOrEmpty(_loadedPath) || Graph == null) return;
+            if(string.IsNullOrEmpty(LoadedPath) || Graph == null) return;
             
             GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
-            AssetCreator.CreateAsset(_loadedPath, graphAsset);
+            AssetCreator.CreateAsset(LoadedPath, graphAsset);
         }
 
         private void LoadGraphAsset()
@@ -134,21 +137,27 @@ namespace VirtualDeviants.Dialogue.Editor
             if (string.IsNullOrEmpty(selectedFile)) return;
 
             selectedFile = ToLocalPath(selectedFile);
-            _loadedPath = selectedFile;
+            LoadedPath = selectedFile;
             DrawGraphView();
         }
 
         private DialogueGraphView LoadGraph(string path)
         {
             GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(path);
-            _loadedPath = path;
+
+            if (graphAsset == null)
+            {
+                EditorUtility.DisplayDialog("Load Graph", "The selected file is not of type GraphAsset!", "Close");
+                return null;
+            }
             
+            LoadedPath = path;
             return GraphAssetConverter.ConvertToGraphView(graphAsset);
         }
         
         private void ExportActiveGraph()
         {
-            if(string.IsNullOrEmpty(_loadedPath) || Graph == null) return;
+            if(string.IsNullOrEmpty(LoadedPath) || Graph == null) return;
             
             string exportPath = EditorUtility.OpenFolderPanel("Save Graph Asset", Application.dataPath, "Name");
             
