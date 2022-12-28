@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da03a4c37fa446b4283783617c76a71d, type: 3}
+  m_Name: New Dialogue
+  m_EditorClassIdentifier: 
+  nodes:
+  - rid: 1575402896794583048
+  - rid: 1575402896794583049
+  - rid: 1575402896794583050
+  references:
+    version: 2
+    RefIds:
+    - rid: 1575402896794583048
+      type: {class: TextNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        guid: 0
+        outputGuids: 
+        speaker: Speaker
+        text: Lorem Ipsum
+    - rid: 1575402896794583049
+      type: {class: TextNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        guid: 1
+        outputGuids: 
+        speaker: 1
+        text: 1
+    - rid: 1575402896794583050
+      type: {class: ChoiceNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        guid: 2
+        outputGuids: 0000000001000000
+        choices:
+        - Choice 1
+        - Choice 2

@@ -25,6 +25,7 @@ namespace VirtualDeviants.Dialogue.Editor
         private const string ContainerTextField = "ds-toolbar_textfield";
         private const string ContainerButton = "ds-toolbar_button";
 
+        private static string _loadedPath;
         private static DialogueGraphView Graph;
         private static TextField GraphName;
 
@@ -36,7 +37,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void CreateGUI()
         {
-            AddGraphView(new DialogueGraphView());
+            DrawGraphView();
             AddToolbar(DefaultFileName);
             AddStyles();
         }
@@ -81,18 +82,19 @@ namespace VirtualDeviants.Dialogue.Editor
             GraphName = ElementUtility.CreateTextField(graphName);
             GraphName.AddClasses(ContainerTextField, ContainerElement);
             toolbar.Add(GraphName);
+            
+            Button[] buttons = {
+                ElementUtility.CreateButton("Save Graph", SaveActiveGraph),
+                ElementUtility.CreateButton("Load Graph", LoadGraphAsset),
+                ElementUtility.CreateButton("Export to Asset", ExportActiveGraph),
+                ElementUtility.CreateButton("Create New Graph", CreateNewGraph)
+            };
 
-            Button saveButton = ElementUtility.CreateButton("Save Graph", SaveActiveGraph);
-            saveButton.AddClasses(ContainerElement, ContainerButton);
-            toolbar.Add(saveButton);
-
-            Button loadButton = ElementUtility.CreateButton("Load Graph", LoadGraph);
-            loadButton.AddClasses(ContainerElement, ContainerButton);
-            toolbar.Add(loadButton);
-
-            Button exportButton = ElementUtility.CreateButton("Export to Asset", ExportActiveGraph);
-            exportButton.AddClasses(ContainerElement, ContainerButton);
-            toolbar.Add(exportButton);
+            foreach (Button button in buttons)
+            {
+                button.AddClasses(ContainerElement, ContainerButton);
+                toolbar.Add(button);
+            }
 
             rootVisualElement.Add(toolbar);
         }
@@ -103,57 +105,51 @@ namespace VirtualDeviants.Dialogue.Editor
             rootVisualElement.AddStyleSheets("Dialogue/DSToolbarStyle.uss");
         }
 
-        private void AddGraphView(DialogueGraphView graphView)
+        private void DrawGraphView()
         {
-            graphView.AuthorWindow = this;
+            if(rootVisualElement.Contains(Graph))
+                rootVisualElement.Remove(Graph);
 
-            graphView.StretchToParentSize();
+            if(string.IsNullOrEmpty(_loadedPath)) return;
             
-            rootVisualElement.Add(graphView);
+            Graph = LoadGraph(_loadedPath);
+            Graph.AuthorWindow = this;
+            Graph.StretchToParentSize();
 
-            Graph = graphView;
+            rootVisualElement.Insert(0, Graph);
         }
 
         private void SaveActiveGraph()
         {
-            string savePath = EditorUtility.OpenFolderPanel("Save Graph Asset", Application.dataPath, "Name");
-            
-            if(string.IsNullOrEmpty(savePath)) return;
-
-            savePath = ToLocalPath(savePath) + "/" + GraphName.value + ".asset";
-
-            if (File.Exists(savePath))
-            {
-                if(!EditorUtility.DisplayDialog("Save Graph", "The file already exists in this folder. Do you want to overwrite it?", "Yes", "No"))
-                    return;
-            }
+            if(string.IsNullOrEmpty(_loadedPath) || Graph == null) return;
             
             GraphAsset graphAsset = GraphAssetConverter.ConvertToAsset(Graph);
-            AssetCreator.CreateAsset(savePath, graphAsset);
+            AssetCreator.CreateAsset(_loadedPath, graphAsset);
         }
 
-        private void LoadGraph()
+        private void LoadGraphAsset()
         {
             string selectedFile = EditorUtility.OpenFilePanel("Load Graph Asset", Application.dataPath, "asset");
 
             if (string.IsNullOrEmpty(selectedFile)) return;
 
             selectedFile = ToLocalPath(selectedFile);
-            GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(selectedFile);
-
-            if (graphAsset == null)
-            {
-                EditorUtility.DisplayDialog("Load Graph", "Invalid file selected! File must be of type GraphAsset.", "Close");
-                return;
-            }
-
-            rootVisualElement.Clear();
-            AddGraphView(GraphAssetConverter.ConvertToGraphView(graphAsset));
-            AddToolbar(graphAsset.name);
+            _loadedPath = selectedFile;
+            DrawGraphView();
         }
 
+        private DialogueGraphView LoadGraph(string path)
+        {
+            GraphAsset graphAsset = AssetDatabase.LoadAssetAtPath<GraphAsset>(path);
+            _loadedPath = path;
+            
+            return GraphAssetConverter.ConvertToGraphView(graphAsset);
+        }
+        
         private void ExportActiveGraph()
         {
+            if(string.IsNullOrEmpty(_loadedPath) || Graph == null) return;
+            
             string exportPath = EditorUtility.OpenFolderPanel("Save Graph Asset", Application.dataPath, "Name");
             
             if(string.IsNullOrEmpty(exportPath)) return;
@@ -171,7 +167,12 @@ namespace VirtualDeviants.Dialogue.Editor
             AssetCreator.CreateAsset(exportPath, dialogueAsset);
         }
 
-        private string ToLocalPath(string absolutePath)
+        private void CreateNewGraph()
+        {
+            
+        }
+
+        private static string ToLocalPath(string absolutePath)
         {
             return absolutePath.Substring(absolutePath.LastIndexOf("Assets/", StringComparison.Ordinal));
         }
