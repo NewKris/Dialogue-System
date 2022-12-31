@@ -13,22 +13,15 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private const string TextStyle = "ds-node_text-text";
         private const string NameStyle = "ds-node_text-name";
         private const string TextContainerStyle = "ds-node_text-container";
-        private const string ExternalContainerStyle = "ds-node_text-external_container";
 
-        private readonly string _speaker;
-        private readonly string _text;
-
-        private TextField _speakerField;
-        private TextField _textField;
-
-        public string Speaker => _speakerField.value;
-        public string Text => _textField.value;
+        public string Speaker { get; private set; }
+        public string Text { get; private set; }
 
         public TextNode(string speaker = "Speaker", string text = "Lorem Ipsum", string nodeName = "Dialogue Node") 
             : base(nodeName)
         {
-            _speaker = speaker;
-            _text = text;
+            Speaker = speaker;
+            Text = text;
         }
 
         public override void Draw(Vector2 position)
@@ -39,20 +32,31 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             AddOutputPort();
 
             VisualElement customDataContainer = new VisualElement();
-            customDataContainer.AddClasses(TextContainerStyle);
+            customDataContainer.AddStyleClasses(TextContainerStyle);
 
-            _speakerField = ElementUtility.CreateTextField(_speaker);
-            _speakerField.AddClasses(NameStyle);
+            TextField speakerField = ElementUtility.CreateTextField(Speaker);
+            speakerField.AddStyleClasses(NameStyle);
+            speakerField.OnValueChanged(UpdateSpeaker);
 
-            _textField = ElementUtility.CreateTextArea(_text);
-            _textField.AddClasses(TextStyle);
+            TextField textField = ElementUtility.CreateTextArea(Text);
+            textField.AddStyleClasses(TextStyle);
+            textField.OnValueChanged(UpdateText);
 
-            customDataContainer.Add(_speakerField);
-            customDataContainer.Add(_textField);
+            customDataContainer.Add(speakerField);
+            customDataContainer.Add(textField);
+            
             extensionContainer.Add(customDataContainer);
-            extensionContainer.AddClasses(ExternalContainerStyle);
-
             RefreshExpandedState();
+        }
+
+        private void UpdateSpeaker(string speaker)
+        {
+            Speaker = speaker;
+        }
+
+        private void UpdateText(string text)
+        {
+            Text = text;
         }
 
     }

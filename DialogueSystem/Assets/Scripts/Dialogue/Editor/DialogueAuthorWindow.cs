@@ -77,10 +77,10 @@ namespace VirtualDeviants.Dialogue.Editor
         private void AddToolbar()
         {
             Toolbar toolbar = new Toolbar();
-            toolbar.AddClasses(ContainerClass);
+            toolbar.AddStyleClasses(ContainerClass);
 
             GraphName = ElementUtility.CreateLabel();
-            GraphName.AddClasses(ContainerElement, ContainerText);
+            GraphName.AddStyleClasses(ContainerElement, ContainerText);
             toolbar.Add(GraphName);
             
             Button[] buttons = {
@@ -91,7 +91,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
             foreach (Button button in buttons)
             {
-                button.AddClasses(ContainerElement, ContainerButton);
+                button.AddStyleClasses(ContainerElement, ContainerButton);
                 toolbar.Add(button);
             }
 

@@ -71,7 +71,7 @@
 	margin: 10px;
 }
 
-.ds-node_text-external_container {
+.ds-node_external_container {
 	background-color: #2D2D2D;
 }
 
@@ -135,4 +135,12 @@
 
 .ds-node_choice-text > .unity-text-field__input {
 	padding: 5px;
+}
+
+.ds-node_actor-container {
+	padding: 10px;
+}
+
+.ds-node_actor-object {
+	
 }

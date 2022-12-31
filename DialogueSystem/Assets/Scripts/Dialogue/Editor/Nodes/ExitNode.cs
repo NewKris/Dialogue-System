@@ -19,7 +19,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             base.Draw(position);
             AddInputPort();
 
-            titleButtonContainer.AddClasses(ContainerStyle);
+            titleButtonContainer.AddStyleClasses(ContainerStyle);
         }
 
 

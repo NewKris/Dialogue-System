@@ -4,7 +4,6 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Helpers;
-using VirtualDeviants.Dialogue.Enumerations;
 using VirtualDeviants.Dialogue.SharedNodeData;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
@@ -32,6 +31,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     {
         private const string TitleTextStyle = "ds-node_title";
         private const string TitleContainerStyle = "ds-node_title_container";
+        private const string ExternalContainerStyle = "ds-node_external_container";
         private const string DragAreaStyle = "ds-node_drag";
 
         public string nodeName;
@@ -59,8 +59,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             titleContainer.AddToClassList(TitleContainerStyle);
 
             VisualElement dragArea = new VisualElement();
-            dragArea.AddClasses(DragAreaStyle);
+            dragArea.AddStyleClasses(DragAreaStyle);
             mainContainer.Insert(0, dragArea);
+            
+            extensionContainer.AddStyleClasses(ExternalContainerStyle);
         }
         
         protected void AddInputPort()
@@ -78,9 +80,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         private void AddTitle(string titleText = "Node")
         {
             _titleField = ElementUtility.CreateTextField(titleText);
-            _titleField.AddClasses(TitleTextStyle);
+            _titleField.AddStyleClasses(TitleTextStyle);
             titleContainer.Insert(0, _titleField);
-            titleContainer.AddClasses(TitleContainerStyle);
+            titleContainer.AddStyleClasses(TitleContainerStyle);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Nodes;
@@ -21,7 +22,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 
             foreach (GraphElement selectedElement in graphSelection)
             {
-                if (!(selectedElement is GraphNode)) continue;
+                if ((selectedElement is not GraphNode)) continue;
 
                 group.AddElement(selectedElement);
             }
@@ -29,25 +30,21 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
             return group;
         }
         
-        public static VisualElement AddClasses(this VisualElement element, params string[] classes)
+        public static void AddStyleClasses(this VisualElement element, params string[] classes)
         {
             foreach (string styleClass in classes)
             {
                 element.AddToClassList(styleClass);
             }
-
-            return element;
         }
 
-        public static VisualElement AddStyleSheets(this VisualElement element, params string[] styleSheetNames)
+        public static void AddStyleSheets(this VisualElement element, params string[] styleSheetNames)
         {
             foreach (string styleSheet in styleSheetNames)
             {
                 StyleSheet stylesheet = (StyleSheet)EditorGUIUtility.Load(styleSheet);
                 element.styleSheets.Add(stylesheet);
             }
-
-            return element;
         }
 
         public static Port CreatePort(this GraphNode node, string portName, PortSettings portSettings)
@@ -58,6 +55,16 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
             return port;
         }
 
+        public static ObjectField CreateObjectField(GameObject value = null)
+        {
+            return new ObjectField()
+            {
+                value = value,
+                objectType = typeof(GameObject),
+                allowSceneObjects = false,
+            };
+        }
+        
         public static Button CreateButton(string text, Action onClick = null)
         {
             Button button = new Button(onClick)
@@ -79,17 +86,30 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
             return foldout;
         }
 
-        public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static void OnValueChanged(this TextField textField, params Action<string>[] callbacks)
+        {
+            textField.RegisterValueChangedCallback(x =>
+            {
+                foreach (Action<string> callback in callbacks)
+                    callback(x.newValue);
+            });
+        }
+
+        public static void OnValueChanged(this ObjectField objectField, params Action<GameObject>[] callbacks)
+        {
+            objectField.RegisterValueChangedCallback(x =>
+            {
+                foreach (Action<GameObject> callback in callbacks)
+                    callback((GameObject) x.newValue);
+            });
+        }
+
+        public static TextField CreateTextField(string value = null)
         {
             TextField textField = new TextField()
             {
                 value = value
             };
-
-            if(onValueChanged != null)
-            {
-                textField.RegisterValueChangedCallback(onValueChanged);
-            }
 
             return textField;
         }
@@ -100,20 +120,20 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
             return label;
         }
 
-        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextArea(string value = null)
         {
-            TextField textArea = CreateTextField(value, onValueChanged);
+            TextField textArea = CreateTextField(value);
             textArea.multiline = true;
             return textArea;
         }
 
     }
 
-    public struct PortSettings
+    public readonly struct PortSettings
     {
-        public Orientation orientation;
-        public Direction direction;
-        public Port.Capacity capacity;
+        public readonly Orientation orientation;
+        public readonly Direction direction;
+        public readonly Port.Capacity capacity;
 
         public PortSettings(Orientation ori, Direction dir, Port.Capacity cap)
         {

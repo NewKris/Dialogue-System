@@ -13,79 +13,93 @@ MonoBehaviour:
   m_Name: LMAO
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 1575402962449858572
-  - rid: 1575402962449858573
-  - rid: 1575402962449858574
-  - rid: 1575402962449858575
-  - rid: 1575402962449858576
-  - rid: 1575402962449858577
+  - rid: 1575402973964009542
+  - rid: 1575402973964009543
+  - rid: 1575402973964009544
+  - rid: 1575402973964009545
+  - rid: 1575402973964009546
+  - rid: 1575402973964009547
+  - rid: 1575402973964009548
   references:
     version: 2
     RefIds:
-    - rid: 1575402962449858572
+    - rid: 1575402973964009542
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858578
+          rid: 1575402973964009549
         guid: 0
         outputGuids: 
-    - rid: 1575402962449858573
+    - rid: 1575402973964009543
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858579
+          rid: 1575402973964009550
         guid: 1
         outputGuids: 00000000
-    - rid: 1575402962449858574
+    - rid: 1575402973964009544
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858580
+          rid: 1575402973964009551
         guid: 2
         outputGuids: 00000000
-    - rid: 1575402962449858575
+    - rid: 1575402973964009545
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858581
+          rid: 1575402973964009552
         guid: 3
-        outputGuids: 0100000002000000
-    - rid: 1575402962449858576
+        outputGuids: 01000000020000000200000002000000
+    - rid: 1575402973964009546
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858582
+          rid: 1575402973964009553
         guid: 4
         outputGuids: 03000000
-    - rid: 1575402962449858577
+    - rid: 1575402973964009547
       type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
       data:
         data:
-          rid: 1575402962449858583
+          rid: 1575402973964009554
         guid: 5
         outputGuids: 04000000
-    - rid: 1575402962449858578
+    - rid: 1575402973964009548
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402973964009555
+        guid: 6
+        outputGuids: 05000000
+    - rid: 1575402973964009549
       type: {class: ExitData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
-    - rid: 1575402962449858579
+    - rid: 1575402973964009550
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         speaker: 2
         text: 2
-    - rid: 1575402962449858580
+    - rid: 1575402973964009551
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         speaker: 3
         text: 3
-    - rid: 1575402962449858581
+    - rid: 1575402973964009552
       type: {class: ChoiceData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         choices:
         - yay
         - nay
-    - rid: 1575402962449858582
+        - Choice 3
+        - Choice 4
+    - rid: 1575402973964009553
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
-        speaker: 1
-        text: 1
-    - rid: 1575402962449858583
+        speaker: 5
+        text: 5
+    - rid: 1575402973964009554
+      type: {class: ActorData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        actorPrefab: {fileID: 2087043850348684683, guid: dc592b408cd93ad4f9aab2e6c4fa8533, type: 3}
+    - rid: 1575402973964009555
       type: {class: EntryData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}

@@ -21,13 +21,13 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             base.Draw(position);
             AddOutputPort();
 
-            titleButtonContainer.AddClasses(ContainerStyle);
+            titleButtonContainer.AddStyleClasses(ContainerStyle);
 
             VisualElement customContainer = new VisualElement();
             TextField idField = ElementUtility.CreateTextField("ID");
-            idField.AddClasses(IdTextStyle);
+            idField.AddStyleClasses(IdTextStyle);
             customContainer.Add(idField);
-            customContainer.AddClasses(IdContainerStyle);
+            customContainer.AddStyleClasses(IdContainerStyle);
 
             extensionContainer.Add(customContainer);
         }

@@ -25,7 +25,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             : base(nodeName)
         {
             choices ??= new[] {"Choice 1", "Choice 2"};
-            _choices = Array.ConvertAll(choices, choice => ElementUtility.CreateTextField(choice)).ToList();
+            _choices = Array.ConvertAll(choices, ElementUtility.CreateTextField).ToList();
         }
 
         public override void Draw(Vector2 position)
@@ -35,7 +35,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             AddInputPort();
 
             Button addChoice = ElementUtility.CreateButton("+", AddChoice);
-            addChoice.AddClasses(AddChoiceStyle);
+            addChoice.AddStyleClasses(AddChoiceStyle);
             mainContainer.Add(addChoice);
 
             foreach (TextField choice in _choices)
@@ -58,12 +58,12 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         private Port CreateChoicePort(TextField choiceName)
         {
-            choiceName.AddClasses(ChoiceTextStyle);
+            choiceName.AddStyleClasses(ChoiceTextStyle);
 
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
 
             Button deleteChoice = ElementUtility.CreateButton("X", () => DeleteChoice(choiceName, outputPort));
-            deleteChoice.AddClasses(DeleteButtonStyle);
+            deleteChoice.AddStyleClasses(DeleteButtonStyle);
 
             outputPort.Add(choiceName);
             outputPort.Add(deleteChoice);

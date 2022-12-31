@@ -10,6 +10,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return node switch
 			{
+				ActorNode actorNode => CreateActorData(actorNode),
 				TextNode textNode => CreateTextData(textNode),
 				ChoiceNode choiceNode => CreateChoiceData(choiceNode),
 				EntryNode => CreateStartData(),
@@ -21,6 +22,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return data switch
 			{
+				ActorData actorData => CreateActorNode(actorData),
 				TextData textData => CreateTextNode(textData),
 				ChoiceData choiceData => CreateChoiceNode(choiceData),
 				EntryData entryData => CreateEntryNode(),
@@ -28,11 +30,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			};
 		}
 
+		private static ActorNode CreateActorNode(ActorData actorData) => new(actorData.actorPrefab);
 		private static TextNode CreateTextNode(TextData textData) => new(textData.speaker, textData.text);
 		private static ChoiceNode CreateChoiceNode(ChoiceData choiceData) => new(choiceData.choices);
 		private static EntryNode CreateEntryNode() => new();
 		private static ExitNode CreateExitNode() => new();
-		
+
+		private static ActorData CreateActorData(ActorNode actorNode) => new(actorNode.Actor);
 		private static TextData CreateTextData(TextNode textNode) => new(textNode.Speaker, textNode.Text);
 		private static ChoiceData CreateChoiceData(ChoiceNode choiceNode) => new(choiceNode.Choices);
 		private static EntryData CreateStartData() => new();

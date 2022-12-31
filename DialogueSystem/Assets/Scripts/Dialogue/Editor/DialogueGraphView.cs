@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.Editor.Nodes;
-using VirtualDeviants.Dialogue.Enumerations;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
@@ -64,23 +63,14 @@ namespace VirtualDeviants.Dialogue.Editor
         {
             mousePosition = GetLocalMousePosition(mousePosition, searchWindow);
 
-            GraphNode node;
-
-            switch (nodeType)
+            GraphNode node = nodeType switch
             {
-                case NodeType.TEXT:
-                    node = new TextNode();
-                    break;
-                case NodeType.CHOICE:
-                    node = new ChoiceNode();
-                    break;
-                case NodeType.EXIT:
-                    node = new ExitNode();
-                    break;
-                default:
-                    node = new EntryNode();
-                    break;
-            }
+                NodeType.ACTOR => new ActorNode(),
+                NodeType.TEXT => new TextNode(),
+                NodeType.CHOICE => new ChoiceNode(),
+                NodeType.EXIT => new ExitNode(),
+                _ => new EntryNode()
+            };
 
             node.Draw(mousePosition);
 

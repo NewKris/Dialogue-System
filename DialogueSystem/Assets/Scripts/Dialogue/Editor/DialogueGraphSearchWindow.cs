@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using VirtualDeviants.Dialogue.Enumerations;
 
 namespace VirtualDeviants.Dialogue.Editor
 {
@@ -32,13 +31,9 @@ namespace VirtualDeviants.Dialogue.Editor
                 new SearchTreeEntry(new GUIContent("Entry", _indent)) {level = 2, userData = NodeType.ENTRY},
                 new SearchTreeEntry(new GUIContent("Exit", _indent)) {level = 2, userData = NodeType.EXIT},
 
-                new SearchTreeGroupEntry(new GUIContent("Effects"), 1),
+                new SearchTreeGroupEntry(new GUIContent("Graphics"), 1),
+                new SearchTreeEntry(new GUIContent("Show Actor", _indent)) {level = 2, userData = NodeType.ACTOR},
             };
-        }
-
-        public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
-        {
-            return _searchEntries;
         }
 
         public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
@@ -47,5 +42,7 @@ namespace VirtualDeviants.Dialogue.Editor
             _graphView.AddElement(_graphView.CreateNode(nodeType, context.screenMousePosition, true));
             return true;
         }
+        
+        public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context) { return _searchEntries; }
     }
 }
