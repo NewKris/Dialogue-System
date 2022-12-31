@@ -44,20 +44,6 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 		private void UpdateValue(GameObject value)
 		{
 			_actorPrefab = value;
-			
-			if(value)
-				ShowPreview(value);
-			else
-				HidePreview();
 		}
-
-		private void ShowPreview(GameObject value)
-		{
-		}
-
-		private void HidePreview()
-		{
-		}
-		
 	}
 }
