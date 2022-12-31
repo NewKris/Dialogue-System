@@ -5,7 +5,6 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using VirtualDeviants.Dialogue.Editor.Nodes;
 using VirtualDeviants.Dialogue.RuntimeAsset;
-using Node = VirtualDeviants.Dialogue.RuntimeAsset.Node;
 
 namespace VirtualDeviants.Dialogue.Editor.Helpers
 {
@@ -15,8 +14,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			DialogueAsset dialogueAsset = ScriptableObject.CreateInstance<DialogueAsset>();
 			var graphNodes = graph.nodes;
-			List<Node> nodes = new List<Node>();
-			Dictionary<GraphNode, Node> closedList = new Dictionary<GraphNode, Node>();
+			List<DialogueNode> nodes = new List<DialogueNode>();
+			Dictionary<GraphNode, DialogueNode> closedList = new Dictionary<GraphNode, DialogueNode>();
 			int universalIndex = 0;
 			
 			foreach (UnityEditor.Experimental.GraphView.Node node in graphNodes)
@@ -31,21 +30,22 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			return dialogueAsset;
 		}
         
-		private static Node MapNode(
+		private static DialogueNode MapNode(
 			GraphNode graphNode, 
-			List<Node> mappedList, 
-			Dictionary<GraphNode, Node> closedList,
+			List<DialogueNode> mappedList, 
+			Dictionary<GraphNode, DialogueNode> closedList,
 			ref int index) 
 		{
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
-			Node node = GraphNodeToDialogueNodeConverter.MapData(graphNode);
-			node.guid = index;
+			DialogueNode dialogueNode = new DialogueNode()
+			{
+				data = DataParser.CreateNodeData(graphNode),
+			};
             
-			closedList.Add(graphNode, node);
-			index++;
+			closedList.Add(graphNode, dialogueNode);
 
-			List<Node> connected = new List<Node>();
+			List<DialogueNode> connected = new List<DialogueNode>();
 			foreach (Port output in graphNode.outputContainer.Children().Where(x => x is Port))
 			{
 				if(!output.connected) continue;
@@ -54,10 +54,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 				connected.Add(MapNode(connection, mappedList, closedList, ref index));
 			}
 
-			node.outputGuids = connected.Select(x => x.guid).ToArray();
-            
-			mappedList.Add(node);
-			return node;
+			dialogueNode.outputGuids = connected.Select(x => x.guid).ToArray();
+
+			dialogueNode.guid = index;
+			mappedList.Add(dialogueNode);
+			index++;
+			
+			return dialogueNode;
 		}
 	}
 }

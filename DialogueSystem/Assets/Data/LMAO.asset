@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da03a4c37fa446b4283783617c76a71d, type: 3}
+  m_Name: LMAO
+  m_EditorClassIdentifier: 
+  nodes:
+  - rid: 1575402962449858572
+  - rid: 1575402962449858573
+  - rid: 1575402962449858574
+  - rid: 1575402962449858575
+  - rid: 1575402962449858576
+  - rid: 1575402962449858577
+  references:
+    version: 2
+    RefIds:
+    - rid: 1575402962449858572
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858578
+        guid: 0
+        outputGuids: 
+    - rid: 1575402962449858573
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858579
+        guid: 1
+        outputGuids: 00000000
+    - rid: 1575402962449858574
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858580
+        guid: 2
+        outputGuids: 00000000
+    - rid: 1575402962449858575
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858581
+        guid: 3
+        outputGuids: 0100000002000000
+    - rid: 1575402962449858576
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858582
+        guid: 4
+        outputGuids: 03000000
+    - rid: 1575402962449858577
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 1575402962449858583
+        guid: 5
+        outputGuids: 04000000
+    - rid: 1575402962449858578
+      type: {class: ExitData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+    - rid: 1575402962449858579
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: 2
+        text: 2
+    - rid: 1575402962449858580
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: 3
+        text: 3
+    - rid: 1575402962449858581
+      type: {class: ChoiceData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        choices:
+        - yay
+        - nay
+    - rid: 1575402962449858582
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: 1
+        text: 1
+    - rid: 1575402962449858583
+      type: {class: EntryData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}

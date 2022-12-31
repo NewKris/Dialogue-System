@@ -58,8 +58,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			if(closedList.ContainsKey(graphNode)) return closedList[graphNode];
 
-			SerializedNode node = GraphNodeToSerializedNodeConverter.MapData(graphNode);
-			node.position = graphNode.Position;
+			//SerializedNode node = GraphNodeToSerializedNodeConverter.MapData(graphNode);
+			SerializedNode node = new SerializedNode()
+			{
+				data = DataParser.CreateNodeData(graphNode),
+				nodeName = graphNode.NodeName,
+				position = graphNode.Position,
+			};
 
 			closedList.Add(graphNode, node);
 
@@ -81,6 +86,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			node.guid = index;
 			mappedList.Add(node);
 			index++;
+			
 			return node;
 		}
 
@@ -92,7 +98,9 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 
 			foreach (SerializedNode node in graphAsset.nodes)
 			{
-				GraphNode graphNode = SerializedNodeToGraphNodeConverter.MapData(node);
+				GraphNode graphNode = DataParser.CreateGraphNode(node.data);
+				graphNode.nodeName = node.nodeName;
+				
 				graphNode.Draw(node.position);
 				newGraphView.AddElement(graphNode);
 				

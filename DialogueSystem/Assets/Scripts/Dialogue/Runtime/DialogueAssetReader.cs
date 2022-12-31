@@ -11,7 +11,7 @@ namespace VirtualDeviants.Dialogue.Runtime
 			dialogue = newDialogue;
 		}
 		
-		public Node Next()
+		public DialogueNode Next()
 		{
 			return null;
 		}

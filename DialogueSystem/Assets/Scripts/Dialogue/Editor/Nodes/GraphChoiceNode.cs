@@ -6,6 +6,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Helpers;
+using VirtualDeviants.Dialogue.SharedNodeData;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
@@ -81,6 +82,5 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             
             outputContainer.Remove(targetPort);
         }
-
     }
 }

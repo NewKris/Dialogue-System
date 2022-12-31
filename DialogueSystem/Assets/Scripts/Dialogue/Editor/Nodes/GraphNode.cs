@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.Enumerations;
+using VirtualDeviants.Dialogue.SharedNodeData;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
@@ -45,7 +46,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             set => SetPosition(new Rect(value, Vector2.one));
         }
 
-        public GraphNode(string nodeName = "Node") : base()
+        protected GraphNode(string nodeName = "Node") : base()
         {
             this.nodeName = nodeName;
         }
@@ -61,7 +62,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             dragArea.AddClasses(DragAreaStyle);
             mainContainer.Insert(0, dragArea);
         }
-
+        
         protected void AddInputPort()
         {
             Port inputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi));
@@ -73,8 +74,8 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
             Port outputPort = this.CreatePort("", new PortSettings(Orientation.Horizontal, Direction.Output, Port.Capacity.Single));
             outputContainer.Add(outputPort);
         }
-
-        protected void AddTitle(string titleText = "Node")
+        
+        private void AddTitle(string titleText = "Node")
         {
             _titleField = ElementUtility.CreateTextField(titleText);
             _titleField.AddClasses(TitleTextStyle);
