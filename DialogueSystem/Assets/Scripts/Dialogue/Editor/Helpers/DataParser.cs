@@ -10,9 +10,9 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		{
 			return node switch
 			{
-				GraphTextNode textNode => CreateTextData(textNode),
-				GraphChoiceNode choiceNode => CreateChoiceData(choiceNode),
-				GraphEntryNode => CreateStartData(),
+				TextNode textNode => CreateTextData(textNode),
+				ChoiceNode choiceNode => CreateChoiceData(choiceNode),
+				EntryNode => CreateStartData(),
 				_ => CreateEndData()
 			};
 		}
@@ -28,13 +28,13 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 			};
 		}
 
-		private static GraphTextNode CreateTextNode(TextData textData) => new(textData.speaker, textData.text);
-		private static GraphChoiceNode CreateChoiceNode(ChoiceData choiceData) => new(choiceData.choices);
-		private static GraphEntryNode CreateEntryNode() => new();
-		private static GraphExitNode CreateExitNode() => new();
+		private static TextNode CreateTextNode(TextData textData) => new(textData.speaker, textData.text);
+		private static ChoiceNode CreateChoiceNode(ChoiceData choiceData) => new(choiceData.choices);
+		private static EntryNode CreateEntryNode() => new();
+		private static ExitNode CreateExitNode() => new();
 		
-		private static TextData CreateTextData(GraphTextNode textNode) => new(textNode.Speaker, textNode.Text);
-		private static ChoiceData CreateChoiceData(GraphChoiceNode choiceNode) => new(choiceNode.Choices);
+		private static TextData CreateTextData(TextNode textNode) => new(textNode.Speaker, textNode.Text);
+		private static ChoiceData CreateChoiceData(ChoiceNode choiceNode) => new(choiceNode.Choices);
 		private static EntryData CreateStartData() => new();
 		private static ExitData CreateEndData() => new();
 

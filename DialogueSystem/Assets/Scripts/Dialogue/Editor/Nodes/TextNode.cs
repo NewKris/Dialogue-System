@@ -7,7 +7,7 @@ using VirtualDeviants.Dialogue.Editor.Helpers;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
-    public class GraphTextNode : GraphNode
+    public class TextNode : GraphNode
     {
 
         private const string TextStyle = "ds-node_text-text";
@@ -24,7 +24,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
         public string Speaker => _speakerField.value;
         public string Text => _textField.value;
 
-        public GraphTextNode(string speaker = "Speaker", string text = "Lorem Ipsum", string nodeName = "Dialogue Node") 
+        public TextNode(string speaker = "Speaker", string text = "Lorem Ipsum", string nodeName = "Dialogue Node") 
             : base(nodeName)
         {
             _speaker = speaker;

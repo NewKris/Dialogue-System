@@ -10,7 +10,7 @@ using VirtualDeviants.Dialogue.SharedNodeData;
 
 namespace VirtualDeviants.Dialogue.Editor.Nodes
 {
-    public class GraphChoiceNode : GraphNode
+    public class ChoiceNode : GraphNode
     {
 
         private const string DeleteButtonStyle = "ds-node_choice-delete_button";
@@ -21,7 +21,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
         public string[] Choices => Array.ConvertAll(_choices.ToArray(), choice => choice.value);
 
-        public GraphChoiceNode(string[] choices = null, string nodeName = "Choice Node") 
+        public ChoiceNode(string[] choices = null, string nodeName = "Choice Node") 
             : base(nodeName)
         {
             choices ??= new[] {"Choice 1", "Choice 2"};
