@@ -15,9 +15,9 @@ namespace VirtualDeviants.Dialogue.Editor
 
         // TODO
         // Support multiple Entry nodes
-        // Use a common NodeData struct for each node class
         // Variables
         // Confirm before discarding unsaved changes
+        // Remember previously loaded graph
 
         private const string DefaultFileName = "New Dialogue";
         private const string ContainerClass = "ds-toolbar_container";
@@ -39,7 +39,7 @@ namespace VirtualDeviants.Dialogue.Editor
         {
             AddToolbar();
             AddStyles();
-            DrawGraphView();
+            LoadCachedGraph();
         }
 
         private void OnEnable()
@@ -51,6 +51,8 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void OnDisable()
         {
+            CacheCurrentGraph();
+            
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnSave);
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignHorizontal);
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignVertical);
@@ -109,8 +111,6 @@ namespace VirtualDeviants.Dialogue.Editor
             if(rootVisualElement.Contains(Graph))
                 rootVisualElement.Remove(Graph);
 
-            if(string.IsNullOrEmpty(LoadedPath)) return;
-            
             Graph = LoadGraph(LoadedPath);
             
             if (Graph == null) return;
@@ -173,6 +173,16 @@ namespace VirtualDeviants.Dialogue.Editor
             DialogueAsset dialogueAsset = DialogueAssetConverter.ConvertToAsset(Graph);
             
             AssetCreator.CreateAsset(exportPath, dialogueAsset);
+        }
+
+        private void CacheCurrentGraph()
+        {
+            
+        }
+
+        private void LoadCachedGraph()
+        {
+            
         }
 
         private static string ToLocalPath(string absolutePath)
