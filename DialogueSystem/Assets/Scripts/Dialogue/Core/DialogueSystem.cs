@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using VirtualDeviants.Dialogue.RuntimeAsset;
 
-namespace VirtualDeviants.Dialogue.Runtime
+namespace VirtualDeviants.Dialogue.Core
 {
 	public class DialogueSystem : MonoBehaviour
 	{
 		private DialogueUIController _ui;
-		private DialogueAssetReader _reader;
 
 		private void Awake()
 		{
@@ -21,7 +19,7 @@ namespace VirtualDeviants.Dialogue.Runtime
 
 		private void StartDialogue(DialogueAsset dialogue)
 		{
-			_reader.StartNewDialogue(dialogue);
+			DialogueAssetReader.StartNewDialogue(dialogue);
 		}
 		
 	}

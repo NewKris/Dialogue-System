@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VirtualDeviants.Dialogue.Runtime
+namespace VirtualDeviants.Dialogue.Core
 {
 	public class DialogueUIController : MonoBehaviour
 	{

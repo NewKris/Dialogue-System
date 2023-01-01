@@ -2,7 +2,7 @@
 using UnityEngine;
 using VirtualDeviants.Dialogue.RuntimeAsset;
 
-namespace VirtualDeviants.Dialogue.Runtime
+namespace VirtualDeviants.Dialogue.Core
 {
 	public class DialogueInteraction : MonoBehaviour
 	{
