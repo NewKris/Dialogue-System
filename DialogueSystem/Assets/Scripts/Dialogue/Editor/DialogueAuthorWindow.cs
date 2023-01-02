@@ -1,9 +1,11 @@
 using System;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEngine;
+using VirtualDeviants.Dialogue.Core;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.RuntimeAsset;
@@ -18,8 +20,10 @@ namespace VirtualDeviants.Dialogue.Editor
         // Variables
         // Confirm before discarding unsaved changes
         // Remember previously loaded graph
+        // Actor preview
 
-        private const string DefaultFileName = "New Dialogue";
+        public static VariableDatabase variableDatabase;
+        
         private const string ContainerClass = "ds-toolbar_container";
         private const string ContainerElement = "ds-toolbar_element";
         private const string ContainerText = "ds-toolbar_text";
@@ -37,6 +41,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
         private void CreateGUI()
         {
+            LoadVariableDatabase();
             AddToolbar();
             AddStyles();
             LoadCachedGraph();
@@ -185,6 +190,23 @@ namespace VirtualDeviants.Dialogue.Editor
             
         }
 
+        private static void LoadVariableDatabase()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:VariableDatabase");
+
+            switch (guids.Length)
+            {
+                case 0:
+                    Debug.LogWarning("Missing Variable Database!");
+                    return;
+                case > 1:
+                    Debug.LogWarning("Multiple Variable Databases found! The Dialogue System may only use one.");
+                    break;
+            }
+
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            variableDatabase = AssetDatabase.LoadAssetAtPath<VariableDatabase>(path);
+        }
         private static string ToLocalPath(string absolutePath)
         {
             return absolutePath.Substring(absolutePath.LastIndexOf("Assets/", StringComparison.Ordinal));

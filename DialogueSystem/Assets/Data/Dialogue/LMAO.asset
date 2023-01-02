@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: LMAO
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 1575402973964009556
-  - rid: 1575402973964009557
-  - rid: 1575402973964009558
-  - rid: 1575402973964009559
-  - rid: 1575402973964009560
-  - rid: 1575402973964009561
-  - rid: 1575402973964009562
+  - rid: 3930785996581896192
+  - rid: 3930785996581896193
+  - rid: 3930785996581896194
+  - rid: 3930785996581896195
+  - rid: 3930785996581896196
+  - rid: 3930785996581896197
+  - rid: 3930785996581896198
   groups:
   - groupTitle: Waow
     groupedNodeGuids: 040000000600000005000000
@@ -28,97 +28,95 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1575402973964009556
+    - rid: 3930785996581896192
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009563
+          rid: 3930785996581896199
         nodeName: Exit
         guid: 0
         outputGuids: 
         position: {x: 1488, y: -125}
-    - rid: 1575402973964009557
+    - rid: 3930785996581896193
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009564
+          rid: 3930785996581896200
         nodeName: 2
         guid: 1
         outputGuids: 00000000
         position: {x: 996, y: -125}
-    - rid: 1575402973964009558
+    - rid: 3930785996581896194
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009565
+          rid: 3930785996581896201
         nodeName: 3
         guid: 2
         outputGuids: 00000000
         position: {x: 996, y: 235}
-    - rid: 1575402973964009559
+    - rid: 3930785996581896195
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009566
+          rid: 3930785996581896202
         nodeName: Choice Node
         guid: 3
-        outputGuids: 01000000020000000200000002000000
+        outputGuids: 0100000002000000
         position: {x: 802, y: 83}
-    - rid: 1575402973964009560
+    - rid: 3930785996581896196
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009567
+          rid: 3930785996581896203
         nodeName: 5
         guid: 4
         outputGuids: 03000000
         position: {x: 218, y: 83}
-    - rid: 1575402973964009561
+    - rid: 3930785996581896197
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009568
+          rid: 3930785996581896204
         nodeName: Show Actor
         guid: 5
         outputGuids: 04000000
         position: {x: -20, y: 83}
-    - rid: 1575402973964009562
+    - rid: 3930785996581896198
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 1575402973964009569
+          rid: 3930785996581896205
         nodeName: Start
         guid: 6
         outputGuids: 05000000
         position: {x: -218, y: 83}
-    - rid: 1575402973964009563
+    - rid: 3930785996581896199
       type: {class: ExitData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
-    - rid: 1575402973964009564
+    - rid: 3930785996581896200
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         speaker: 2
         text: 2
-    - rid: 1575402973964009565
+    - rid: 3930785996581896201
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         speaker: 3
         text: 3
-    - rid: 1575402973964009566
+    - rid: 3930785996581896202
       type: {class: ChoiceData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         choices:
         - yay
         - nay
-        - Choice 3
-        - Choice 4
-    - rid: 1575402973964009567
+    - rid: 3930785996581896203
       type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         speaker: 5
         text: 5
-    - rid: 1575402973964009568
+    - rid: 3930785996581896204
       type: {class: ActorData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         actorPrefab: {fileID: 2087043850348684683, guid: dc592b408cd93ad4f9aab2e6c4fa8533, type: 3}
-    - rid: 1575402973964009569
+    - rid: 3930785996581896205
       type: {class: EntryData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
