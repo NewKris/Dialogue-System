@@ -104,6 +104,15 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
             });
         }
 
+        public static void OnValueChanged(this EnumField enumField, params Action<Enum>[] callbacks)
+        {
+            enumField.RegisterValueChangedCallback(x =>
+            {
+                foreach (Action<Enum> callback in callbacks)
+                    callback(x.newValue);
+            });
+        }
+
         public static TextField CreateTextField(string value = null)
         {
             TextField textField = new TextField()

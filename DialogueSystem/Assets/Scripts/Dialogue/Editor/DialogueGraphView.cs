@@ -65,6 +65,7 @@ namespace VirtualDeviants.Dialogue.Editor
 
             GraphNode node = nodeType switch
             {
+                NodeType.VARIABLE => new VariableNode(),
                 NodeType.ACTOR => new ActorNode(),
                 NodeType.TEXT => new TextNode(),
                 NodeType.CHOICE => new ChoiceNode(),

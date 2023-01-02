@@ -21,6 +21,17 @@
 	padding-left: 8px;
 }
 
+.ds-node_delete-button {
+	height: 20px;
+	width: 20px;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.ds-node_delete-button:hover {
+	background-color: red;
+}
+
 .ds-node_text-text {
 	width: 400px;
 	min-height: 25px;
@@ -104,17 +115,6 @@
 	background-color: #1E1E1E;
 }
 
-.ds-node_choice-delete_button {
-	height: 20px;
-	width: 20px;
-	background-color: transparent;
-	border-color: transparent;
-}
-
-.ds-node_choice-delete_button:hover {
-	background-color: red;
-}
-
 .ds-node_choice-add {
 	height: 30px;
 	width: 30px;
@@ -139,6 +139,8 @@
 
 .ds-node_actor-container {
 	padding: 10px;
+	display: flex;
+	flex-direction: row;
 }
 
 .ds-node_actor-object {

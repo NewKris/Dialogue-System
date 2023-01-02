@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEngine;
 using VirtualDeviants.Dialogue.Core;
+using VirtualDeviants.Dialogue.Core.DialogueVariables;
 using VirtualDeviants.Dialogue.Editor.GraphSaving;
 using VirtualDeviants.Dialogue.Editor.Helpers;
 using VirtualDeviants.Dialogue.RuntimeAsset;

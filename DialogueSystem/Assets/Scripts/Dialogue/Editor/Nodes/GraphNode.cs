@@ -29,6 +29,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
     public abstract class GraphNode : Node
     {
+
+        protected const string DeleteButtonStyle = "ds-node_delete-button";
+        
         private const string TitleTextStyle = "ds-node_title";
         private const string TitleContainerStyle = "ds-node_title_container";
         private const string ExternalContainerStyle = "ds-node_external_container";

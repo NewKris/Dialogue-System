@@ -35,6 +35,10 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 			actorField.AddStyleClasses(ObjectFieldStyle);
 			actorField.OnValueChanged(UpdateValue);
 			
+			Button deleteButton = ElementUtility.CreateButton("X", () => { actorField.value = null; });
+			deleteButton.AddStyleClasses(DeleteButtonStyle);
+			
+			customDataContainer.Add(deleteButton);
 			customDataContainer.Add(actorField);
 			
 			extensionContainer.Add(customDataContainer);

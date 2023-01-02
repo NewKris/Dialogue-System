@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VirtualDeviants.Dialogue.Core
+namespace VirtualDeviants.Dialogue.Core.DialogueVariables
 {
     [CreateAssetMenu(menuName = "Variable Database")]
     public class VariableDatabase : ScriptableObject

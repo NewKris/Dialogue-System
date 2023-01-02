@@ -26,6 +26,7 @@ namespace VirtualDeviants.Dialogue.Editor
                 new SearchTreeGroupEntry(new GUIContent("Create Node")),
                 new SearchTreeEntry(new GUIContent("Text", _indent)) {level = 1, userData = NodeType.TEXT},
                 new SearchTreeEntry(new GUIContent("Choice", _indent)) {level = 1, userData = NodeType.CHOICE},
+                new SearchTreeEntry(new GUIContent("Variable", _indent)) {level = 1, userData = NodeType.VARIABLE},
 
                 new SearchTreeGroupEntry(new GUIContent("Flow"), 1),
                 new SearchTreeEntry(new GUIContent("Entry", _indent)) {level = 2, userData = NodeType.ENTRY},

@@ -13,7 +13,6 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
     public class ChoiceNode : GraphNode
     {
 
-        private const string DeleteButtonStyle = "ds-node_choice-delete_button";
         private const string AddChoiceStyle = "ds-node_choice-add";
         private const string ChoiceTextStyle = "ds-node_choice-text";
 

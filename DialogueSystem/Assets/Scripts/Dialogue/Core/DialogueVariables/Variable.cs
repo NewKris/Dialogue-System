@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace VirtualDeviants.Dialogue.Core
+namespace VirtualDeviants.Dialogue.Core.DialogueVariables
 {
 	[Serializable]
 	public class Variable
