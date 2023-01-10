@@ -13,21 +13,67 @@ MonoBehaviour:
   m_Name: WAOW
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 3930786190010613770
+  - rid: 3930786196715470848
+  - rid: 3930786196715470849
+  - rid: 3930786196715470850
+  - rid: 3930786196715470851
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 3930786190010613770
+    - rid: 3930786196715470848
       type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
       data:
         data:
-          rid: 3930786190010613771
-        nodeName: Variable
+          rid: 3930786196715470852
+        nodeName: 1
         guid: 0
         outputGuids: ffffffff
+        position: {x: 833, y: -87}
+    - rid: 3930786196715470849
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 3930786196715470853
+        nodeName: 2
+        guid: 1
+        outputGuids: ffffffff
+        position: {x: 833, y: 272}
+    - rid: 3930786196715470850
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 3930786196715470854
+        nodeName: If
+        guid: 2
+        outputGuids: 0000000001000000
+        position: {x: 661, y: 119}
+    - rid: 3930786196715470851
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 3930786196715470855
+        nodeName: Variable
+        guid: 3
+        outputGuids: 02000000
         position: {x: 427, y: 119}
-    - rid: 3930786190010613771
+    - rid: 3930786196715470852
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: 1
+        text: 1
+    - rid: 3930786196715470853
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: 2
+        text: 2
+    - rid: 3930786196715470854
+      type: {class: IfData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        key: Time/DaysPlayed
+        value: 0
+        comparison: 3
+    - rid: 3930786196715470855
       type: {class: VariableData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
       data:
         key: WeekDay

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -8,8 +9,9 @@ namespace VirtualDeviants.Dialogue.Editor
     public class DialogueGraphSearchWindow : ScriptableObject, ISearchWindowProvider
     {
 
+        private static Texture2D Indent;
+        
         private DialogueGraphView _graphView;
-        private Texture2D _indent;
 
         private List<SearchTreeEntry> _searchEntries;
 
@@ -17,23 +19,24 @@ namespace VirtualDeviants.Dialogue.Editor
         {
             _graphView = graphView;
 
-            _indent = new Texture2D(1, 1);
-            _indent.SetPixel(0, 0, Color.clear);
-            _indent.Apply();
+            Indent = new Texture2D(1, 1);
+            Indent.SetPixel(0, 0, Color.clear);
+            Indent.Apply();
 
             _searchEntries = new List<SearchTreeEntry>()
             {
                 new SearchTreeGroupEntry(new GUIContent("Create Node")),
-                new SearchTreeEntry(new GUIContent("Text", _indent)) {level = 1, userData = NodeType.TEXT},
-                new SearchTreeEntry(new GUIContent("Choice", _indent)) {level = 1, userData = NodeType.CHOICE},
-                new SearchTreeEntry(new GUIContent("Variable", _indent)) {level = 1, userData = NodeType.VARIABLE},
+                CreateEntry("Text", 1, NodeType.TEXT),
+                CreateEntry("Choice", 1, NodeType.CHOICE),
+                CreateEntry("Variable", 1, NodeType.VARIABLE),
 
                 new SearchTreeGroupEntry(new GUIContent("Flow"), 1),
-                new SearchTreeEntry(new GUIContent("Entry", _indent)) {level = 2, userData = NodeType.ENTRY},
-                new SearchTreeEntry(new GUIContent("Exit", _indent)) {level = 2, userData = NodeType.EXIT},
+                CreateEntry("If", 2, NodeType.IF),
+                CreateEntry("Start", 2, NodeType.ENTRY),
+                CreateEntry("Exit", 2, NodeType.EXIT),
 
                 new SearchTreeGroupEntry(new GUIContent("Graphics"), 1),
-                new SearchTreeEntry(new GUIContent("Show Actor", _indent)) {level = 2, userData = NodeType.ACTOR},
+                CreateEntry("Show Actor", 2, NodeType.ACTOR),
             };
         }
 
@@ -45,5 +48,10 @@ namespace VirtualDeviants.Dialogue.Editor
         }
         
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context) { return _searchEntries; }
+
+        private static SearchTreeEntry CreateEntry(string label, int level, Enum nodeType)
+        {
+            return new SearchTreeEntry(new GUIContent(label, Indent)) {level = level, userData = nodeType};
+        }
     }
 }

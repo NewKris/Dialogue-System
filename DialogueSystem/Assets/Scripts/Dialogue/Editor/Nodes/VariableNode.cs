@@ -39,7 +39,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
 			List<string> keys = DialogueAuthorWindow.variableKeys;
 			int index = string.IsNullOrEmpty(VariableKey) ? 0:  keys.IndexOf(VariableKey);
-			PopupField<string> popupField = new PopupField<string>(keys, index, FormatSelectedValueCallback);
+			PopupField<string> popupField = new PopupField<string>(keys, index, OnVariableChanged);
 			customDataContainer.Add(popupField);
 
 			EnumField operationEnum = new EnumField(Operation);
@@ -56,7 +56,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 			RefreshExpandedState();
 		}
 
-		private string FormatSelectedValueCallback(string arg)
+		private string OnVariableChanged(string arg)
 		{
 			VariableKey = arg;
 			return arg;
@@ -65,11 +65,6 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 		private void OnOperationChanged(Enum newValue)
 		{
 			Operation = (VariableOperation)newValue;
-		}
-
-		private void OnVariableChanged(string newValue)
-		{
-			VariableKey = newValue;
 		}
 
 		private void OnValueChanged(float newValue)

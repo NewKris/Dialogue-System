@@ -2,6 +2,7 @@ namespace VirtualDeviants.Dialogue.Editor
 {
     public enum NodeType
     {
+        IF,
         VARIABLE,
         ACTOR,
         TEXT,
