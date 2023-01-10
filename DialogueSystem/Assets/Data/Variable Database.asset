@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b38efcb07d51b4a85dbb106965c130, type: 3}
   m_Name: Variable Database
   m_EditorClassIdentifier: 
-  variables: []
+  variables:
+  - name: Time/DaysPlayed
+    defaultValue: 0
+    value: 0
+  - name: Time/DayTime
+    defaultValue: 0
+    value: 0
+  - name: YAHOO
+    defaultValue: 0
+    value: 0
+  - name: WeekDay
+    defaultValue: 0
+    value: 0
+  - name: Month
+    defaultValue: 0
+    value: 0
+  - name: WAOW
+    defaultValue: 0
+    value: 0

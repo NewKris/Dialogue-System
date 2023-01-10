@@ -25,6 +25,7 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 			VariableKey = variableKey;
 			OperationValue = operationValue;
 			Operation = operation;
+
 		}
 
 		public override void Draw(Vector2 position)
@@ -36,7 +37,9 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
 			VisualElement customDataContainer = new VisualElement();
 
-			PopupField<string> popupField = new PopupField<string>();
+			List<string> keys = DialogueAuthorWindow.variableKeys;
+			int index = string.IsNullOrEmpty(VariableKey) ? 0:  keys.IndexOf(VariableKey);
+			PopupField<string> popupField = new PopupField<string>(keys, index, FormatSelectedValueCallback);
 			customDataContainer.Add(popupField);
 
 			EnumField operationEnum = new EnumField(Operation);
@@ -51,6 +54,12 @@ namespace VirtualDeviants.Dialogue.Editor.Nodes
 
 			extensionContainer.Add(customDataContainer);
 			RefreshExpandedState();
+		}
+
+		private string FormatSelectedValueCallback(string arg)
+		{
+			VariableKey = arg;
+			return arg;
 		}
 
 		private void OnOperationChanged(Enum newValue)

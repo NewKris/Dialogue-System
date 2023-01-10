@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -24,7 +25,9 @@ namespace VirtualDeviants.Dialogue.Editor
         // Actor preview
 
         public static VariableDatabase variableDatabase;
-        
+        public static List<string> variableKeys;
+        public static event Action<List<string>> OnKeysUpdated;
+            
         private const string ContainerClass = "ds-toolbar_container";
         private const string ContainerElement = "ds-toolbar_element";
         private const string ContainerText = "ds-toolbar_text";
@@ -53,6 +56,8 @@ namespace VirtualDeviants.Dialogue.Editor
             rootVisualElement.RegisterCallback<KeyDownEvent>(OnSave, TrickleDown.TrickleDown);
             rootVisualElement.RegisterCallback<KeyDownEvent>(OnAlignHorizontal, TrickleDown.TrickleDown);
             rootVisualElement.RegisterCallback<KeyDownEvent>(OnAlignVertical, TrickleDown.TrickleDown);
+
+            VariableDatabase.OnVariableListChanged += UpdateKeys;
         }
 
         private void OnDisable()
@@ -62,6 +67,8 @@ namespace VirtualDeviants.Dialogue.Editor
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnSave);
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignHorizontal);
             rootVisualElement.UnregisterCallback<KeyDownEvent>(OnAlignVertical);
+            
+            VariableDatabase.OnVariableListChanged -= UpdateKeys;
         }
 
         private void OnSave(KeyDownEvent keyDownEvent)
@@ -207,7 +214,17 @@ namespace VirtualDeviants.Dialogue.Editor
 
             string path = AssetDatabase.GUIDToAssetPath(guids[0]);
             variableDatabase = AssetDatabase.LoadAssetAtPath<VariableDatabase>(path);
+            UpdateKeys();
         }
+
+        private static void UpdateKeys()
+        {
+            if (variableDatabase == null || variableDatabase.variables.Length == 0) return;
+            
+            variableKeys = variableDatabase.variables.Select(x => x.name).ToList();
+            OnKeysUpdated?.Invoke(variableKeys);
+        }
+        
         private static string ToLocalPath(string absolutePath)
         {
             return absolutePath.Substring(absolutePath.LastIndexOf("Assets/", StringComparison.Ordinal));

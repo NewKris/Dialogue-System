@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9aa304d0f64ebcb027d2deeb710c48, type: 3}
   m_Name: WAOW
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - rid: 3930786190010613770
   groups: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3930786190010613770
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 3930786190010613771
+        nodeName: Variable
+        guid: 0
+        outputGuids: ffffffff
+        position: {x: 427, y: 119}
+    - rid: 3930786190010613771
+      type: {class: VariableData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        key: WeekDay
+        value: 0
+        operation: 1

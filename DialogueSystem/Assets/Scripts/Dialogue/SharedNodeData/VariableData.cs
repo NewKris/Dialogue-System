@@ -4,9 +4,9 @@ namespace VirtualDeviants.Dialogue.SharedNodeData
 {
 	public class VariableData : NodeData
 	{
-		public readonly string key;
-		public readonly float value;
-		public readonly VariableOperation operation;
+		public string key;
+		public float value;
+		public VariableOperation operation;
 
 		public VariableData(string key, float value, VariableOperation operation)
 		{
