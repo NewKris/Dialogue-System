@@ -2,5 +2,5 @@
 
 namespace VirtualDeviants.Dialogue.SharedNodeData
 {
-	public class EntryData : NodeData { }
+	public class StartData : NodeData { }
 }

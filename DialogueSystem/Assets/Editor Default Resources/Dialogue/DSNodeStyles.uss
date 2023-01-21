@@ -86,23 +86,9 @@
 	background-color: #2D2D2D;
 }
 
-.ds-node_entry-title_container {
+.ds-node_start-title_container {
 	background-color: #3ACF38;
 	height: 100%;
-}
-
-.ds-node_entry-id_container {
-	justify-content: center;
-	padding: 4px;
-}
-
-.ds-node_entry-id {
-	margin: auto;
-}
-
-.ds-node_entry-id > .unity-text-field__input {
-	-unity-text-align: middle-center;
-	font-size: 16px;
 }
 
 .ds-node_exit-title_container {

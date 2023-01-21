@@ -71,7 +71,7 @@ namespace VirtualDeviants.Dialogue.Editor
                 NodeType.TEXT => new TextNode(),
                 NodeType.CHOICE => new ChoiceNode(),
                 NodeType.EXIT => new ExitNode(),
-                _ => new EntryNode()
+                _ => new StartNode()
             };
 
             node.Draw(mousePosition);

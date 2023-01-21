@@ -15,8 +15,8 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 				ActorNode actorNode => CreateActorData(actorNode),
 				TextNode textNode => CreateTextData(textNode),
 				ChoiceNode choiceNode => CreateChoiceData(choiceNode),
-				EntryNode => CreateEntryData(),
-				_ => CreateEndData()
+				StartNode => CreateStartData(),
+				_ => CreateExitData()
 			};
 		}
 
@@ -29,7 +29,7 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 				ActorData actorData => CreateActorNode(actorData),
 				TextData textData => CreateTextNode(textData),
 				ChoiceData choiceData => CreateChoiceNode(choiceData),
-				EntryData entryData => CreateEntryNode(),
+				StartData startData => CreateStartNode(),
 				_ => CreateExitNode()
 			};
 		}
@@ -57,14 +57,14 @@ namespace VirtualDeviants.Dialogue.Editor.Helpers
 		private static ChoiceData CreateChoiceData(ChoiceNode choiceNode) 
 			=> new(choiceNode.Choices);
 		
-		private static EntryNode CreateEntryNode() 
+		private static StartNode CreateStartNode() 
 			=> new();
-		private static EntryData CreateEntryData() 
+		private static StartData CreateStartData() 
 			=> new();
 		
 		private static ExitNode CreateExitNode() 
 			=> new();
-		private static ExitData CreateEndData() 
+		private static ExitData CreateExitData() 
 			=> new();
 
 	}
