@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da03a4c37fa446b4283783617c76a71d, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  nodes:
+  - rid: 929982735036448786
+  - rid: 929982735036448787
+  - rid: 929982735036448788
+  - rid: 929982735036448789
+  references:
+    version: 2
+    RefIds:
+    - rid: 929982735036448786
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 929982735036448790
+        guid: 0
+        outputGuids: 
+    - rid: 929982735036448787
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 929982735036448791
+        guid: 1
+        outputGuids: 00000000
+    - rid: 929982735036448788
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 929982735036448792
+        guid: 2
+        outputGuids: 01000000
+    - rid: 929982735036448789
+      type: {class: DialogueNode, ns: VirtualDeviants.Dialogue.RuntimeAsset, asm: Assembly-CSharp}
+      data:
+        data:
+          rid: 929982735036448793
+        guid: 3
+        outputGuids: 02000000
+    - rid: 929982735036448790
+      type: {class: ExitData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+    - rid: 929982735036448791
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: Speaker
+        text: Lorem Ipsum
+    - rid: 929982735036448792
+      type: {class: ActorData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        actorPrefab: {fileID: 2087043850348684683, guid: dc592b408cd93ad4f9aab2e6c4fa8533, type: 3}
+    - rid: 929982735036448793
+      type: {class: StartData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}

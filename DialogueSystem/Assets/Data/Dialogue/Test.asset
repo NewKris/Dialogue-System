@@ -12,8 +12,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9aa304d0f64ebcb027d2deeb710c48, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - rid: 929982735036448794
+  - rid: 929982735036448795
+  - rid: 929982735036448796
+  - rid: 929982735036448797
   groups: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 929982735036448794
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 929982735036448798
+        nodeName: Exit
+        guid: 0
+        outputGuids: 
+        position: {x: 1332, y: 25}
+    - rid: 929982735036448795
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 929982735036448799
+        nodeName: Dialogue Node
+        guid: 1
+        outputGuids: 00000000
+        position: {x: 795, y: 11}
+    - rid: 929982735036448796
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 929982735036448800
+        nodeName: Show Actor
+        guid: 2
+        outputGuids: 01000000
+        position: {x: 546, y: 25}
+    - rid: 929982735036448797
+      type: {class: SerializedNode, ns: VirtualDeviants.Dialogue.Editor.GraphSaving, asm: Assembly-CSharp-Editor}
+      data:
+        data:
+          rid: 929982735036448801
+        nodeName: Start
+        guid: 3
+        outputGuids: 02000000
+        position: {x: 314, y: 25}
+    - rid: 929982735036448798
+      type: {class: ExitData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+    - rid: 929982735036448799
+      type: {class: TextData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        speaker: Speaker
+        text: Lorem Ipsum
+    - rid: 929982735036448800
+      type: {class: ActorData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
+      data:
+        actorPrefab: {fileID: 2087043850348684683, guid: dc592b408cd93ad4f9aab2e6c4fa8533, type: 3}
+    - rid: 929982735036448801
+      type: {class: StartData, ns: VirtualDeviants.Dialogue.SharedNodeData, asm: Assembly-CSharp}
