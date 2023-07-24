@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3758ec81eb94528956e2c78d5bdc0c7, type: 3}
+  m_Name: Variable Database
+  m_EditorClassIdentifier: 
+  variables:
+  - key: npc/talked-to/bob
+    type: 0
+    booleanValue: 0
+    integerValue: 0
+    stringValue: 
+  - key: names/player
+    type: 2
+    booleanValue: 0
+    integerValue: 0
+    stringValue: 
+  - key: stats/money
+    type: 1
+    booleanValue: 0
+    integerValue: 0
+    stringValue: 
+  - key: stats/lust
+    type: 1
+    booleanValue: 0
+    integerValue: 0
+    stringValue: 
