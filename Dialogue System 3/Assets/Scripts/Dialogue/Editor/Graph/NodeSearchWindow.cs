@@ -1,42 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Linq;
+using System.Reflection;
+using NUnit.Framework;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using VirtualDeviants.Dialogue.Editor.Graph.Nodes;
+using VirtualDeviants.Dialogue.Attributes;
 using VirtualDeviants.Dialogue.Editor.Utility;
 
-namespace VirtualDeviants.Dialogue.Editor.Graph
-{
-	public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
-	{
+namespace VirtualDeviants.Dialogue.Editor.Graph {
+	public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider {
 		private DialogueGraphView _dialogueGraphView;
 		
-		public void Initialize(DialogueGraphView dialogueGraphView)
-		{
+		public void Initialize(DialogueGraphView dialogueGraphView) {
 			_dialogueGraphView = dialogueGraphView;
 		}
 
-		public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
-		{
-			return NodeSearchConfig.SearchEntries;
+		public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context) {
+			Type[] nodeTypes = Assembly.GetAssembly(typeof(NodeTemplate))
+				.GetTypes()
+				.Where(type => type.IsSubclassOf(typeof(NodeTemplate)))
+				.ToArray();
+			
+			List<SearchTreeEntry> entries = nodeTypes.Select(CreateEntry).ToList();
+
+			entries.Insert(0, CreateGroup("Create Node"));
+            
+			return entries;
 		}
 
-		public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
-		{
-			Type nodeTemplateType = (Type) searchTreeEntry.userData;
-			Type graphNodeType = NodeTypeMap.NodeTypes[nodeTemplateType];
+		public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context) {
+			Type nodeTemplateType = (Type)searchTreeEntry.userData;
 
-			NodeTemplate template = (NodeTemplate) Activator.CreateInstance(nodeTemplateType);
- 			GraphNode node = (GraphNode) Activator.CreateInstance(graphNodeType, CreateDisplayName(template), template);
+			NodeTemplate template = (NodeTemplate)Activator.CreateInstance(nodeTemplateType);
+ 			GraphNode node = new GraphNode(template);
 			
 			_dialogueGraphView.AddNodeToGraph(node, context.screenMousePosition, true);
 			return true;
 		}
 
-		private static string CreateDisplayName(NodeTemplate template)
-		{
-			return Regex.Replace(template.GetType().Name, "(\\B[A-Z])", " $1").Replace(" Node", "");
+		private SearchTreeEntry CreateEntry(Type nodeType) {
+			return new SearchTreeEntry(new GUIContent(
+				GetNodeTitle(nodeType),
+				TextureUtility.GetIndentTexture()
+			)) {
+				level = 1,
+				userData = nodeType
+			};
+		}
+		
+		private static SearchTreeGroupEntry CreateGroup(string groupName, int level = 0) {
+			return new SearchTreeGroupEntry(new GUIContent(groupName), level);
+		}
+
+		private string GetNodeTitle(Type nodeType) {
+			NodeTitle title = nodeType.GetCustomAttribute<NodeTitle>();
+			return title?.title ?? nodeType.ToString();
 		}
 	}
 }

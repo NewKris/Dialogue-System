@@ -3,49 +3,47 @@ using UnityEditor;
 using UnityEngine;
 using VirtualDeviants.Dialogue.Editor.Utility;
 
-namespace VirtualDeviants.Dialogue.Editor.ShortcutCommands
-{
-	public class ExportCommand : ICommand
-	{
+namespace VirtualDeviants.Dialogue.Editor.ShortcutCommands {
+	public class ExportCommand : ICommand {
 		private readonly DialogueAuthorWindow _dialogueAuthorWindow;
 
-		public ExportCommand(DialogueAuthorWindow dialogueAuthorWindow)
-		{
+		public ExportCommand(DialogueAuthorWindow dialogueAuthorWindow) {
 			_dialogueAuthorWindow = dialogueAuthorWindow;
 		}
 		
-		public void Execute()
-		{
-			string path = EditorUtility.SaveFilePanel("Export Dialogue Graph", Application.dataPath, "New Dialogue", "asset");
-			if(string.IsNullOrEmpty(path)) return;
+		public void Execute() {
+			string path = EditorUtility.SaveFilePanel(
+				"Export Dialogue Graph", 
+				Application.dataPath, 
+				"New Dialogue", 
+				"asset"
+			);
 
-			DialogueAsset dialogueAsset;
-			
-			if (File.Exists(path))
-			{
+			if (string.IsNullOrEmpty(path)) {
+				return;
+			}
+
+			if (File.Exists(path)) {
 				path = ToRelativePath(path);
-				dialogueAsset = (DialogueAsset) AssetDatabase.LoadAssetAtPath(path, typeof(DialogueAsset));
+				DialogueAsset dialogueAsset = (DialogueAsset)AssetDatabase.LoadAssetAtPath(path, typeof(DialogueAsset));
 
-				if (dialogueAsset == null)
-				{
+				if (dialogueAsset == null) {
 					Debug.LogError($"The selected file is not of type {typeof(DialogueAsset)}\nPath: {path}");
 					return;
 				}
 
-				dialogueAsset.nodes = _dialogueAuthorWindow.activeGraphView.ToDialogueAssetNodes();
+				dialogueAsset.nodes = _dialogueAuthorWindow.activeGraphView.ToRuntimeAssetNodes();
 				EditorUtility.SetDirty(dialogueAsset);
 			}
-			else
-			{
+			else {
 				path = ToRelativePath(path);
-				dialogueAsset = (DialogueAsset) ScriptableObject.CreateInstance(typeof(DialogueAsset));
-				dialogueAsset.nodes = _dialogueAuthorWindow.activeGraphView.ToDialogueAssetNodes();
-				AssetDatabase.CreateAsset(dialogueAsset, path);
+				DialogueAsset newDialogueAsset = (DialogueAsset)ScriptableObject.CreateInstance(typeof(DialogueAsset));
+				newDialogueAsset.nodes = _dialogueAuthorWindow.activeGraphView.ToRuntimeAssetNodes();
+				AssetDatabase.CreateAsset(newDialogueAsset, path);
 			}
 		}
 
-		private string ToRelativePath(string absolutePath)
-		{
+		private string ToRelativePath(string absolutePath) {
 			return absolutePath.Replace(Application.dataPath, "Assets/");
 		}
 	}

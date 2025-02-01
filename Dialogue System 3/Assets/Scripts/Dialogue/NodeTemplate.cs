@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace VirtualDeviants.Dialogue
-{
+namespace VirtualDeviants.Dialogue {
 	[Serializable]
-	public class NodeTemplate
-	{
+	public class NodeTemplate {
 		public int[] connections;
 	}
 }
