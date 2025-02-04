@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VirtualDeviants.Dialogue.Attributes;
 using VirtualDeviants.Dialogue.Editor.Utility;
 
 namespace VirtualDeviants.Dialogue.Editor.Graph {
 	public class GraphNode : Node {
-		private const string NODE_TITLE_CONTAINER_TITLE = "node-title-container__title-input";
-		private const string NODE_CUSTOM_DATA_CONTAINER = "node-custom-data-container";
-		private const string NODE_HEADER = "node-header";
+		private const string TITLE_CONTAINER_TITLE_CLASS = "container__title";
+		private const string TITLE_CONTAINER_CLASS = "title-container";
+		private const string CUSTOM_DATA_CONTAINER_CLASS = "custom-data-container";
 		
 		private readonly VisualElement _customDataContainer;
 		private readonly Label _title;
@@ -26,7 +26,7 @@ namespace VirtualDeviants.Dialogue.Editor.Graph {
 			Template = template;
 			
 			_title = VisualElementFactory.CreateLabel(GetNodeTitle());
-			_title.AddStyleClass(NODE_TITLE_CONTAINER_TITLE);
+			_title.AddStyleClass(TITLE_CONTAINER_TITLE_CLASS);
 			
 			_customDataContainer = new VisualElement();
 		}
@@ -60,21 +60,35 @@ namespace VirtualDeviants.Dialogue.Editor.Graph {
 		}
 
 		public void Draw(Vector2 initialPosition) {
-			VisualElement nodeHeader = new VisualElement();
-			nodeHeader.AddStyleClass(NODE_HEADER);
-			contentContainer.Insert(0, nodeHeader);
-			
 			Position = initialPosition;
+			
 			titleContainer.Insert(0, _title);
+			titleContainer.AddStyleClass(TITLE_CONTAINER_CLASS);
 			
 			extensionContainer.Add(_customDataContainer);
-			_customDataContainer.AddStyleClass(NODE_CUSTOM_DATA_CONTAINER);
+			_customDataContainer.AddStyleClass(CUSTOM_DATA_CONTAINER_CLASS);
+
+			if (ShouldCreateInputPort()) {
+				inputContainer.Add(VisualElementFactory.CreateInputPort(this));
+			}
+			
+			if (ShouldCreateOutputPort()) {
+				outputContainer.Add(VisualElementFactory.CreateOutputPort(this));
+			}
 			
 			RefreshExpandedState();
 		}
 
+		private bool ShouldCreateOutputPort() {
+			return Template.GetAttribute<RemoveDefaultOutputPort>() == null;
+		}
+		
+		private bool ShouldCreateInputPort() {
+			return Template.GetAttribute<RemoveDefaultInputPort>() == null;
+		}
+
 		private string GetNodeTitle() {
-			return Template.GetType().ToString();
+			return Template.GetAttribute<NodeTitle>()?.title ?? Template.ToString();
 		}
 	}
 }

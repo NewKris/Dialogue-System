@@ -75,15 +75,15 @@ namespace VirtualDeviants.Dialogue.Editor.Utility {
 			return new Label(value);
 		}
 
-		public static Port CreateInputPort(this GraphNode node) {
+		public static Port CreateInputPort(GraphNode node) {
 			Port newPort = node.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
 			newPort.portName = "";
 			return newPort;
 		}
 
-		public static Port CreateOutputPort(this GraphNode node, string label = "") {
+		public static Port CreateOutputPort(GraphNode node) {
 			Port newPort = node.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-			newPort.portName = label;
+			newPort.portName = "";
 			return newPort;
 		}
 	}

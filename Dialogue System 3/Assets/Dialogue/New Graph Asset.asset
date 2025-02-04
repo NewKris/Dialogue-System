@@ -12,8 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d149bb992e0e470bb1f8c9605e697959, type: 3}
   m_Name: New Graph Asset
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - template:
+      rid: 1299412840282325043
+    connections: 
+    position: {x: 783.3963, y: 185.66039}
+  - template:
+      rid: 1299412840282325044
+    connections: ffffffff
+    position: {x: 142.18869, y: 185.66039}
+  - template:
+      rid: 1299412840282325045
+    connections: ffffffff
+    position: {x: 439.2453, y: 185.66039}
   groups: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1299412840282325043
+      type: {class: ExitNode, ns: VirtualDeviants.Dialogue.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+    - rid: 1299412840282325044
+      type: {class: EntryNode, ns: VirtualDeviants.Dialogue.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+    - rid: 1299412840282325045
+      type: {class: TextNode, ns: VirtualDeviants.Dialogue.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        speaker: 
+        text: 

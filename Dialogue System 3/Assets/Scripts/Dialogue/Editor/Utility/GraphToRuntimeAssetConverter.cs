@@ -10,9 +10,9 @@ namespace VirtualDeviants.Dialogue.Editor.Utility {
 		public static NodeTemplate[] ToRuntimeAssetNodes(this DialogueGraphView graphView) {
 			List<GraphNode> nodes = graphView.nodes.Where(node => node is GraphNode).Cast<GraphNode>().ToList();
 			
-			//GraphNode startNode = nodes.First(node => node.Template is EntryNode);
-			//nodes.Remove(startNode);
-			//nodes.Insert(0, startNode);
+			GraphNode startNode = nodes.First(node => node.Template is EntryNode);
+			nodes.Remove(startNode);
+			nodes.Insert(0, startNode);
 			
 			NodeTemplate[] templates = nodes.Select(node => node.Template).ToArray();
 			for (int i = 0; i < templates.Length; i++) {

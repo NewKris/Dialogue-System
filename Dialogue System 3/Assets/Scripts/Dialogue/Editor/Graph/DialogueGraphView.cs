@@ -9,7 +9,7 @@ using VirtualDeviants.Dialogue.Editor.Utility;
 namespace VirtualDeviants.Dialogue.Editor.Graph {
 	public class DialogueGraphView : GraphView {
 		private NodeSearchWindow _searchWindow;
-		private EditorWindow _window;
+		private readonly EditorWindow _window;
 		
 		public DialogueGraphView(EditorWindow window) {
 			_window = window;
@@ -23,6 +23,15 @@ namespace VirtualDeviants.Dialogue.Editor.Graph {
 				WarnUnchangedChanges.Invoke();
 				return changes;
 			};
+		}
+
+		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter) {
+			return ports
+				.Where(port => port != startPort 
+				               && port.node != startPort.node
+				               && port.direction != startPort.direction
+				)
+				.ToList();
 		}
 
 		public void AddNodeToGraph(GraphNode graphNode, Vector2 position, bool convertToLocalPosition = false) {
@@ -63,7 +72,7 @@ namespace VirtualDeviants.Dialogue.Editor.Graph {
 			_searchWindow.Initialize(this);
 			
 			nodeCreationRequest = (context) => SearchWindow.Open(
-				new SearchWindowContext(context.screenMousePosition, 100, 100),
+				new SearchWindowContext(context.screenMousePosition),
 				_searchWindow
 			);
 		}
