@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d149bb992e0e470bb1f8c9605e697959, type: 3}
   m_Name: New Graph Asset
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - template:
+      rid: 1299412858760593458
+    connections: ffffffff
+    position: {x: 530.71704, y: 215.54718}
   groups: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1299412858760593458
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        speaker: 
+        text: 

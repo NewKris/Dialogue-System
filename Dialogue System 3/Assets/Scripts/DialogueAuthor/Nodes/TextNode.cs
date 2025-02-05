@@ -1,9 +1,11 @@
+using System;
 using VirtualDeviants.DialogueAuthor.Attributes;
 
 namespace VirtualDeviants.DialogueAuthor.Nodes {
     [NodeTitle("Text Node")]
+    [Serializable]
     public class TextNode : NodeTemplate {
-        [TextField] public string speaker;
-        [TextField] public string text;
+        public string speaker;
+        public string text;
     }
 }
