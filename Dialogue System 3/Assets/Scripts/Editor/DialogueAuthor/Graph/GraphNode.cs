@@ -17,7 +17,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		private const string TITLE_CONTAINER_CLASS = "title-container";
 		private const string CUSTOM_DATA_CONTAINER_CLASS = "custom-data-container";
 
-		private static readonly HashSet<NodeDrawer> Drawers = new HashSet<NodeDrawer>();
+		private static readonly HashSet<NodeMemberDrawer> Drawers = new HashSet<NodeMemberDrawer>();
 
 		private VisualElement _customDataContainer;
 		private Label _title;
@@ -31,10 +31,6 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		
 		public GraphNode(NodeTemplate template) {
 			Template = template;
-		}
-
-		public void UpdateTemplateData() {
-			// TODO here
 		}
 
 		public GraphNode[] GetConnections() {
@@ -66,7 +62,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 
 			AddTitle();
 			AddDefaultPorts();
-			AddCustomData(Template);
+			DrawCustomData(Template);
 			
 			RefreshExpandedState();
 		}
@@ -89,18 +85,23 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 			}
 		}
 		
-		private void AddCustomData(NodeTemplate template) {
+		private void DrawCustomData(NodeTemplate template) {
 			_customDataContainer = new VisualElement();
 			_customDataContainer.AddStyleClass(CUSTOM_DATA_CONTAINER_CLASS);
 
-			Type drawerType = GetDrawerType(template);
-
-			if (drawerType == null) {
-				return;
-			}
+			FieldInfo[] fields = template.GetFieldsWithAttribute(typeof(NodeMember));
 			
-			NodeDrawer drawer = GetDrawer(drawerType);
-			_customDataContainer.Add(drawer.Draw(template));
+			foreach (FieldInfo fieldInfo in fields) {
+				NodeMember attribute = fieldInfo.GetCustomAttribute<NodeMember>();
+				Type drawerType = FindMemberDrawerType(attribute);
+
+				if (drawerType == null) {
+					continue;
+				}
+
+				NodeMemberDrawer drawer = GetDrawer(drawerType);
+				_customDataContainer.Add(drawer.Draw(fieldInfo, template));
+			}
 
 			extensionContainer.Add(_customDataContainer);
 		}
@@ -117,15 +118,15 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 			return Template.GetAttribute<NodeTitle>()?.title ?? Template.ToString();
 		}
 
-		private Type GetDrawerType(NodeTemplate template) {
-			return Assembly.GetAssembly(typeof(NodeDrawer))
+		private Type FindMemberDrawerType(NodeMember nodeMember) {
+			return Assembly.GetAssembly(typeof(NodeMemberDrawer))
 				.GetTypes()
-				.Where(type => Attribute.IsDefined(type, typeof(CustomNodeDrawer)))
-				.FirstOrDefault(drawerType => drawerType.GetCustomAttribute<CustomNodeDrawer>()?.type == template.GetType());
+				.Where(type => Attribute.IsDefined(type, typeof(CustomMemberDrawer)))
+				.FirstOrDefault(drawerType => drawerType.GetCustomAttribute<CustomMemberDrawer>().type == nodeMember.GetType());
 		}
 
-		private NodeDrawer GetDrawer(Type drawerType) {
-			NodeDrawer drawer = Drawers.FirstOrDefault(d => d.GetType() == drawerType);
+		private NodeMemberDrawer GetDrawer(Type drawerType) {
+			NodeMemberDrawer drawer = Drawers.FirstOrDefault(d => d.GetType() == drawerType);
 			
 			if (drawer == null) {
 				drawer = CreateDrawerInstance(drawerType);
@@ -135,8 +136,8 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 			return drawer;
 		}
 
-		private NodeDrawer CreateDrawerInstance(Type drawerType) {
-			return Activator.CreateInstance(drawerType) as NodeDrawer;
+		private NodeMemberDrawer CreateDrawerInstance(Type drawerType) {
+			return Activator.CreateInstance(drawerType) as NodeMemberDrawer;
 		}
 	}
 }
