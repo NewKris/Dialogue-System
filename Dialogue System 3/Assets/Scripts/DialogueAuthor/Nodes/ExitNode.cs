@@ -1,4 +1,4 @@
-using VirtualDeviants.DialogueAuthor.Attributes;
+using VirtualDeviants.DialogueAuthor.NodeAttributes;
 
 namespace VirtualDeviants.DialogueAuthor.Nodes {
     [NodeTitle("Exit")]

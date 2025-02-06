@@ -1,6 +1,6 @@
 using System;
 
-namespace VirtualDeviants.DialogueAuthor.Attributes {
+namespace VirtualDeviants.DialogueAuthor.NodeAttributes {
     public class NodeTitle : Attribute {
         public readonly string title;
 

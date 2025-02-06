@@ -12,6 +12,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
         
         private static SerializedGraphNode[] SerializeNodes(DialogueGraphView graph) {
             GraphNode[] nodes = graph.nodes.Where(node => node is GraphNode).Cast<GraphNode>().ToArray();
+            
             return nodes.Select(node => {
                 int[] connections = node.GetConnections().Select(connectedNode => {
                     if (connectedNode == null) {

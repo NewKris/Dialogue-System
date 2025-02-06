@@ -13,32 +13,35 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - rid: 1299412858760593463
-  - rid: 1299412858760593464
-  - rid: 1299412858760593465
-  - rid: 1299412858760593466
+  - rid: 1299412882334416896
+  - rid: 1299412882334416897
+  - rid: 1299412882334416898
+  - rid: 1299412882334416899
   references:
     version: 2
     RefIds:
-    - rid: 1299412858760593463
+    - rid: 1299412882334416896
       type: {class: EntryNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
-        connections: 01000000
-    - rid: 1299412858760593464
+        connections: 03000000
+    - rid: 1299412882334416897
       type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
         connections: 02000000
-        speaker: 3525252
-        text: 'fgdgdger
-
-          getheher'
-    - rid: 1299412858760593465
-      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
-      data:
-        connections: 03000000
         speaker: 32423
         text: gfgff
-    - rid: 1299412858760593466
+    - rid: 1299412882334416898
       type: {class: ExitNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
         connections: 
+    - rid: 1299412882334416899
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 01000000
+        speaker: fkpfmwe
+        text: 'fgdgdger fsfsw few fwopmfwopf pmowepogwm
+
+          prmgwpomgrw pomgropmwrgprowm
+          wromgw
+
+          getheher gre'

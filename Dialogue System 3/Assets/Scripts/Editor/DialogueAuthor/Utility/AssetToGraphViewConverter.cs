@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -39,14 +40,14 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
                     .Select(connection => connection == -1 ? null : graphNodes[connection])
                     .ToArray();
 
-                Port[] ports = graphNodes[i].GetOutputPorts();
+                List<Port> outputPorts = graphNodes[i].GetOutputPorts();
 
                 for (int j = 0; j < connections.Length; j++) {
                     if (connections[j] == null) {
                         continue;
                     }
 
-                    Port outputPort = ports[j];
+                    Port outputPort = outputPorts[j];
                     Port inputPort = connections[j].GetInputPort();
                     
                     graphView.CreateConnection(outputPort, inputPort);

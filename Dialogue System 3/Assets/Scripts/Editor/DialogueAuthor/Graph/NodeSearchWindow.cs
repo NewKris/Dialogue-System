@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using VirtualDeviants.DialogueAuthor;
-using VirtualDeviants.DialogueAuthor.Attributes;
+using VirtualDeviants.DialogueAuthor.NodeAttributes;
 using VirtualDeviants.Editor.DialogueAuthor.Utility;
 
 namespace VirtualDeviants.Editor.DialogueAuthor.Graph {

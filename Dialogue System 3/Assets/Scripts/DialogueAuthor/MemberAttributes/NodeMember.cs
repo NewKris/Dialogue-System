@@ -1,6 +1,6 @@
 using System;
 
-namespace VirtualDeviants.DialogueAuthor.Attributes {
+namespace VirtualDeviants.DialogueAuthor.MemberAttributes {
     public class NodeMember : Attribute {
         
     }

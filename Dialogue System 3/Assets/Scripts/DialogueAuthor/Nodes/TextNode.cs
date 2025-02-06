@@ -1,5 +1,6 @@
 using System;
-using VirtualDeviants.DialogueAuthor.Attributes;
+using VirtualDeviants.DialogueAuthor.MemberAttributes;
+using VirtualDeviants.DialogueAuthor.NodeAttributes;
 
 namespace VirtualDeviants.DialogueAuthor.Nodes {
     [NodeTitle("Text Node")]

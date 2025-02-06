@@ -6,7 +6,8 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.DialogueAuthor;
-using VirtualDeviants.DialogueAuthor.Attributes;
+using VirtualDeviants.DialogueAuthor.MemberAttributes;
+using VirtualDeviants.DialogueAuthor.NodeAttributes;
 using VirtualDeviants.Editor.DialogueAuthor.Attributes;
 using VirtualDeviants.Editor.DialogueAuthor.NodeDrawers;
 using VirtualDeviants.Editor.DialogueAuthor.Utility;
@@ -19,6 +20,9 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 
 		private static readonly HashSet<NodeMemberDrawer> Drawers = new HashSet<NodeMemberDrawer>();
 
+		private readonly List<Port> _outputPorts;
+		
+		private Port _inputPort;
 		private VisualElement _customDataContainer;
 		private Label _title;
 
@@ -31,16 +35,11 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		
 		public GraphNode(NodeTemplate template) {
 			Template = template;
+			_outputPorts = new List<Port>();
 		}
 
 		public GraphNode[] GetConnections() {
-			if (!outputContainer.Children().Any(child => child is Port)) {
-				return Array.Empty<GraphNode>();
-			}
-
-			Port[] ports = outputContainer.Children().Where(port => port is Port).Cast<Port>().ToArray();
-			
-			return ports.Select(port => {
+			return _outputPorts.Select(port => {
 				if (!port.connections.Any()) {
 					return null;
 				}
@@ -50,11 +49,11 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		}
 
 		public Port GetInputPort() {
-			return inputContainer.Children().First() as Port;;
+			return _inputPort;
 		}
 
-		public Port[] GetOutputPorts() {
-			return outputContainer.Children().Where(port => port is Port).Cast<Port>().ToArray();
+		public List<Port> GetOutputPorts() {
+			return _outputPorts;
 		}
 
 		public void Draw(Vector2 initialPosition) {
@@ -77,11 +76,11 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 
 		private void AddDefaultPorts() {
 			if (ShouldCreateInputPort()) {
-				inputContainer.Add(VisualElementFactory.CreateInputPort(this));
+				inputContainer.Add(CreateInputPort());
 			}
 			
 			if (ShouldCreateOutputPort()) {
-				outputContainer.Add(VisualElementFactory.CreateOutputPort(this));
+				outputContainer.Add(CreateOutputPort());
 			}
 		}
 		
@@ -100,12 +99,18 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 				}
 
 				NodeMemberDrawer drawer = GetDrawer(drawerType);
-				_customDataContainer.Add(drawer.Draw(fieldInfo, template));
+				GetTargetContainer(fieldInfo).Add(drawer.Draw(fieldInfo, this, template));
 			}
 
 			extensionContainer.Add(_customDataContainer);
 		}
-		
+
+		private VisualElement GetTargetContainer(FieldInfo fieldInfo) {
+			return !Attribute.IsDefined(fieldInfo, typeof(InsertToOutputContainer)) 
+				? _customDataContainer 
+				: outputContainer;
+		}
+        
 		private bool ShouldCreateOutputPort() {
 			return Template.GetAttribute<RemoveDefaultOutputPort>() == null;
 		}
@@ -138,6 +143,27 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 
 		private NodeMemberDrawer CreateDrawerInstance(Type drawerType) {
 			return Activator.CreateInstance(drawerType) as NodeMemberDrawer;
+		}
+		
+		private Port CreateInputPort() {
+			_inputPort = InstantiatePort(
+				Orientation.Horizontal, 
+				Direction.Input,
+				Port.Capacity.Multi,
+				typeof(bool)
+			);
+
+			_inputPort.portName = "";
+
+			return _inputPort;
+		}
+
+		public Port CreateOutputPort() {
+			Port newPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+			newPort.portName = "";
+			_outputPorts.Add(newPort);
+
+			return newPort;
 		}
 	}
 }

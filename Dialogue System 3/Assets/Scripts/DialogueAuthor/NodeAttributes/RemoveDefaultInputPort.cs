@@ -1,5 +1,5 @@
 using System;
 
-namespace VirtualDeviants.DialogueAuthor.Attributes {
+namespace VirtualDeviants.DialogueAuthor.NodeAttributes {
     public class RemoveDefaultInputPort : Attribute { }
 }

@@ -14,7 +14,13 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
         
 		public static Button CreateButton(string text, Action onClick = null) {
 			return new Button(onClick) {
-				text = text
+				text = text,
+			};
+		}
+		
+		public static Button CreateButton(Texture2D icon, Action onClick = null) {
+			return new Button(onClick) {
+				iconImage = Background.FromTexture2D(icon)
 			};
 		}
 
@@ -65,7 +71,10 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
 			};
 
 			textField.AddStyleClass("node__text-field");
-			textField.RegisterValueChangedCallback(x => callback(x.newValue));
+			textField.RegisterValueChangedCallback(x => {
+				WarnUnchangedChanges.Invoke();
+				callback(x.newValue);
+			});
 
 			return textField;
 		}
@@ -103,18 +112,6 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
 
 		public static Label CreateLabel(string value) {
 			return new Label(value);
-		}
-
-		public static Port CreateInputPort(GraphNode node) {
-			Port newPort = node.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
-			newPort.portName = "";
-			return newPort;
-		}
-
-		public static Port CreateOutputPort(GraphNode node) {
-			Port newPort = node.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-			newPort.portName = "";
-			return newPort;
 		}
 	}
 }
