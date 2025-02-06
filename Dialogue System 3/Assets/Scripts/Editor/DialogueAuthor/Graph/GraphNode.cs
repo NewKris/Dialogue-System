@@ -13,11 +13,11 @@ using VirtualDeviants.Editor.DialogueAuthor.Utility;
 
 namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 	public class GraphNode : Node {
-		private const string TITLE_CONTAINER_TITLE_CLASS = "container__title";
+		private const string TITLE_CONTAINER_TITLE_CLASS = "title-container__title";
 		private const string TITLE_CONTAINER_CLASS = "title-container";
 		private const string CUSTOM_DATA_CONTAINER_CLASS = "custom-data-container";
 
-		private static HashSet<NodeDrawer> Drawers = new HashSet<NodeDrawer>();
+		private static readonly HashSet<NodeDrawer> Drawers = new HashSet<NodeDrawer>();
 
 		private VisualElement _customDataContainer;
 		private Label _title;
@@ -74,6 +74,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		private void AddTitle() {
 			_title = VisualElementFactory.CreateLabel(GetNodeTitle());
 			_title.AddStyleClass(TITLE_CONTAINER_TITLE_CLASS);
+			
 			titleContainer.Insert(0, _title);
 			titleContainer.AddStyleClass(TITLE_CONTAINER_CLASS);
 		}

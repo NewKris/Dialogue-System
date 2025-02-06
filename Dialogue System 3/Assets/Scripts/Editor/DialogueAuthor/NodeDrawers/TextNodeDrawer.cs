@@ -10,16 +10,21 @@ namespace VirtualDeviants.Editor.DialogueAuthor.NodeDrawers {
     public class TextNodeDrawer : NodeDrawer {
         public override VisualElement Draw(NodeTemplate nodeTemplate) {
             VisualElement dataContainer = VisualElementFactory.CreateEmpty();
+            TextNode textNode = nodeTemplate as TextNode;
             
-            if (nodeTemplate is not TextNode textNode) {
-                return dataContainer;
-            }
-            
-            dataContainer.Add(VisualElementFactory.CreateTextField(textNode.speaker, val => {
+            dataContainer.Add(VisualElementFactory.CreateTextField(
+                textNode.speaker, 
+                "Speaker: ",
+                "Bob",
+                val => {
                 textNode.speaker = val;
             }));
             
-            dataContainer.Add(VisualElementFactory.CreateTextArea(textNode.text, val => {
+            dataContainer.Add(VisualElementFactory.CreateTextArea(
+                textNode.text,
+                "Text: ",
+                "Lorem ipsum...",
+                val => {
                 textNode.text = val;
             }));
 

@@ -3,12 +3,29 @@
     padding: 20px;
 }
 
-.title-container__title {
-    
+.title-container__title > .unity-base-field__label {
+    background-color: green;
 }
 
 .custom-data-container {
     background-color: var(--dark-grey);
+}
+
+.node__text-field > .unity-text-field__input {
+    min-width: 200px;
+    max-width: 400px;
+    margin: 5px;
+}
+
+.node__text-field > .unity-text-field__label {
+    -unity-font-style: bold;
+}
+
+.node__text-field--area {
+}
+
+.node__text-field--area > .unity-text-field__input {
+    padding: 10px;
 }
 
 /*

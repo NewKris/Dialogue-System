@@ -45,19 +45,41 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
 			return group;
 		}
 
-		public static TextField CreateTextField(string value, Action<string> callback) {
-			TextField textField = new TextField() {
+		public static TextField CreateTextField(
+			string value, 
+			string label,
+			string placeholder,
+			Action<string> callback
+		) {
+			TextField textField = new TextField {
 				value = value,
+				label = label,
+				textEdition = {
+					placeholder = placeholder
+				},
+				textSelection = {
+					selectAllOnFocus = false,
+					selectAllOnMouseUp = false,
+					selectionColor = Color.yellow
+				}
 			};
 
+			textField.AddStyleClass("node__text-field");
 			textField.RegisterValueChangedCallback(x => callback(x.newValue));
 
 			return textField;
 		}
 
-		public static TextField CreateTextArea(string value, Action<string> callback) {
-			TextField textArea = CreateTextField(value, callback);
+		public static TextField CreateTextArea(
+			string value, 
+			string label, 
+			string placeholder,
+			Action<string> callback
+		) {
+			TextField textArea = CreateTextField(value, label, placeholder, callback);
 			textArea.multiline = true;
+			textArea.AddStyleClass("node__text-field--area");
+			
 			return textArea;
 		}
 

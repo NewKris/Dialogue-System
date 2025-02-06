@@ -14,16 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - template:
-      rid: 1299412858760593458
-    connections: ffffffff
-    position: {x: 530.71704, y: 215.54718}
+      rid: 1299412858760593460
+    connections: 02000000
+    position: {x: 690.1133, y: 62.490566}
+  - template:
+      rid: 1299412858760593461
+    connections: 03000000
+    position: {x: 52.528305, y: 62.490566}
+  - template:
+      rid: 1299412858760593462
+    connections: 
+    position: {x: 1191.8491, y: 62.490566}
+  - template:
+      rid: 1299412858760593459
+    connections: 00000000
+    position: {x: 227.32077, y: 62.490566}
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 1299412858760593458
+    - rid: 1299412858760593459
       type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
+        connections: 02000000
+        speaker: fkpfmwe
+        text: 'fgdgdger fsfsw few fwopmfwopf pmowepogwm
+
+          prmgwpomgrw pomgropmwrgprowm
+          wromgw
+
+          getheher gre'
+    - rid: 1299412858760593460
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 03000000
+        speaker: 32423
+        text: gfgff
+    - rid: 1299412858760593461
+      type: {class: EntryNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 01000000
+    - rid: 1299412858760593462
+      type: {class: ExitNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
         connections: 
-        speaker: 
-        text: 
