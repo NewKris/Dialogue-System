@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using VirtualDeviants.DialogueAuthor.MemberAttributes;
 using VirtualDeviants.DialogueAuthor.NodeAttributes;
 
@@ -8,7 +9,7 @@ namespace VirtualDeviants.DialogueAuthor.Nodes {
     [RemoveDefaultOutputPort]
     [Serializable]
     public class ChoiceNode : NodeTemplate {
-        [ChoiceInput]
-        public List<string> choiceText;
+        [FormerlySerializedAs("choiceText")] [ChoiceInput]
+        public List<string> choices;
     }
 }

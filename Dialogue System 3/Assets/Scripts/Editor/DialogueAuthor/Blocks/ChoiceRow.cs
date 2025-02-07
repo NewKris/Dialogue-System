@@ -2,37 +2,41 @@ using System;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-using VirtualDeviants.DialogueAuthor.Nodes;
 using VirtualDeviants.Editor.DialogueAuthor.Graph;
 using VirtualDeviants.Editor.DialogueAuthor.Utility;
 
 namespace VirtualDeviants.Editor.DialogueAuthor.Blocks {
     public class ChoiceRow : VisualElement {
+        private Port _port;
+        private GraphNode _node;
+        
         public ChoiceRow(
             string value,
-            int index, 
             GraphNode node,
-            Action<string> onValueChanged
+            Action<ChoiceRow, string> onValueChanged,
+            Action<ChoiceRow> onDelete
         ) {
+            _node = node;
+            
             Add(VisualElementFactory.CreateTextField(
                 value,
-                index.ToString(),
+                "",
                 "Choice",
-                onValueChanged
+                (newValue) => onValueChanged(this, newValue)
             ));
 
-            Port port = node.CreateOutputPort(); 
+            _port = _node.CreateOutputPort(); 
             
             Add(VisualElementFactory.CreateButton(
                 EditorGUIUtility.FindTexture("AS Badge Delete"),
-                () => {
-                    node.DeletePort(port);
-                    parent.Remove(this);
-                    // TODO: Remove choice text
-                }
+                () => onDelete(this)
             ));
             
-            Add(port);
+            Add(_port);
+        }
+
+        public void DisconnectPort() {
+            _node.DeletePort(_port);
         }
     }
 }

@@ -75,7 +75,14 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		}
 
 		public void DeletePort(Port port) {
-			port.DisconnectAll();
+			Edge[] connections = port.connections.ToArray();
+			
+			foreach (Edge connection in connections) {
+				port.Disconnect(connection);
+				connection.input.Disconnect(connection);
+				connection.RemoveFromHierarchy();
+			}
+			
 			_outputPorts.Remove(port);
 		}
 
