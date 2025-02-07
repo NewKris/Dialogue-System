@@ -14,47 +14,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - template:
-      rid: 1299412858760593460
-    connections: 02000000
-    position: {x: 690.1133, y: 62.490566}
-  - template:
       rid: 1299412858760593461
-    connections: 03000000
+    connections: 01000000
     position: {x: 52.528305, y: 62.490566}
   - template:
-      rid: 1299412858760593462
-    connections: 
-    position: {x: 1191.8491, y: 62.490566}
+      rid: 1299412882334416950
+    connections: 020000000300000004000000ffffffffffffffff
+    position: {x: 259.92453, y: 62.490566}
   - template:
-      rid: 1299412858760593459
-    connections: 00000000
-    position: {x: 227.32077, y: 62.490566}
+      rid: 1299412882334416951
+    connections: 05000000
+    position: {x: 764.3774, y: -76.07547}
+  - template:
+      rid: 1299412882334416952
+    connections: 05000000
+    position: {x: 764.3774, y: 88.754715}
+  - template:
+      rid: 1299412882334416953
+    connections: 05000000
+    position: {x: 764.3774, y: 279.8491}
+  - template:
+      rid: 1299412882334416954
+    connections: 
+    position: {x: 1304.151, y: 36.226418}
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 1299412858760593459
-      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
-      data:
-        connections: 02000000
-        speaker: fkpfmwe
-        text: 'fgdgdger fsfsw few fwopmfwopf pmowepogwm
-
-          prmgwpomgrw pomgropmwrgprowm
-          wromgw
-
-          getheher gre'
-    - rid: 1299412858760593460
-      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
-      data:
-        connections: 03000000
-        speaker: 32423
-        text: gfgff
     - rid: 1299412858760593461
       type: {class: EntryNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
-        connections: 01000000
-    - rid: 1299412858760593462
+        connections: 03000000
+    - rid: 1299412882334416950
+      type: {class: ChoiceNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        choiceText:
+        - sadafd
+        - qwert5435343242
+        - abcwawawa
+        - ffa
+        - ere
+        - 
+        - 
+    - rid: 1299412882334416951
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        speaker: 1
+        text: 
+    - rid: 1299412882334416952
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        speaker: 2
+        text: 
+    - rid: 1299412882334416953
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+        speaker: 3
+        text: 
+    - rid: 1299412882334416954
       type: {class: ExitNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
       data:
         connections: 

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VirtualDeviants.DialogueAuthor.MemberAttributes;
 using VirtualDeviants.Editor.DialogueAuthor.Attributes;
+using VirtualDeviants.Editor.DialogueAuthor.Blocks;
 using VirtualDeviants.Editor.DialogueAuthor.Graph;
 using VirtualDeviants.Editor.DialogueAuthor.Utility;
 
@@ -34,7 +35,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.NodeDrawers {
                     int newIndex = choices.Count - 1;
                     fieldInfo.SetValue(objectInstance, choices);
                     
-                    container.Add(CreateChoiceRow(
+                    container.Add(new ChoiceRow(
                         "",
                         newIndex,
                         node,
@@ -51,7 +52,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.NodeDrawers {
             for (int i = 0; i < choices.Count; i++) {
                 int temp = i;
                 
-                container.Add(CreateChoiceRow(
+                container.Add(new ChoiceRow(
                     choices[i],
                     i,
                     node,
@@ -63,29 +64,6 @@ namespace VirtualDeviants.Editor.DialogueAuthor.NodeDrawers {
             }
             
             return container;
-        }
-
-        private VisualElement CreateChoiceRow(
-            string value, 
-            int index, 
-            GraphNode parentNode, 
-            Action<string> updateTextCallback
-        ) {
-            VisualElement row = VisualElementFactory.CreateEmpty();
-            
-            TextField inputField = VisualElementFactory.CreateTextField(
-                value,
-                index.ToString(),
-                "Choice",
-                updateTextCallback
-            );
-
-            Port outputPort = parentNode.CreateOutputPort();
-            
-            row.Add(inputField);
-            row.Add(outputPort);
-            
-            return row;
         }
     }
 }

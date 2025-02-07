@@ -39,7 +39,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 		}
 
 		public GraphNode[] GetConnections() {
-			return _outputPorts.Select(port => {
+			return GetOutputPorts().Select(port => {
 				if (!port.connections.Any()) {
 					return null;
 				}
@@ -64,6 +64,19 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 			DrawCustomData(Template);
 			
 			RefreshExpandedState();
+		}
+		
+		public Port CreateOutputPort() {
+			Port newPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+			newPort.portName = "";
+			_outputPorts.Add(newPort);
+
+			return newPort;
+		}
+
+		public void DeletePort(Port port) {
+			port.DisconnectAll();
+			_outputPorts.Remove(port);
 		}
 
 		private void AddTitle() {
@@ -99,16 +112,10 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 				}
 
 				NodeMemberDrawer drawer = GetDrawer(drawerType);
-				GetTargetContainer(fieldInfo).Add(drawer.Draw(fieldInfo, this, template));
+				_customDataContainer.Add(drawer.Draw(fieldInfo, this, template));
 			}
 
 			extensionContainer.Add(_customDataContainer);
-		}
-
-		private VisualElement GetTargetContainer(FieldInfo fieldInfo) {
-			return !Attribute.IsDefined(fieldInfo, typeof(InsertToOutputContainer)) 
-				? _customDataContainer 
-				: outputContainer;
 		}
         
 		private bool ShouldCreateOutputPort() {
@@ -156,14 +163,6 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Graph {
 			_inputPort.portName = "";
 
 			return _inputPort;
-		}
-
-		public Port CreateOutputPort() {
-			Port newPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-			newPort.portName = "";
-			_outputPorts.Add(newPort);
-
-			return newPort;
 		}
 	}
 }

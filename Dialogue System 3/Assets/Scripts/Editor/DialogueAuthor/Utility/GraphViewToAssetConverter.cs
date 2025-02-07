@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using VirtualDeviants.Editor.DialogueAuthor.Graph;
 
 namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
@@ -21,7 +22,7 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Utility {
 					
                     return Array.IndexOf(nodes, connectedNode);
                 }).ToArray();
-                
+
                 return new SerializedGraphNode() {
                     template = node.Template,
                     connections = connections,

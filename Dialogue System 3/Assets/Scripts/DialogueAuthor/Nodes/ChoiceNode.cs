@@ -8,7 +8,7 @@ namespace VirtualDeviants.DialogueAuthor.Nodes {
     [RemoveDefaultOutputPort]
     [Serializable]
     public class ChoiceNode : NodeTemplate {
-        [ChoiceInput, InsertToOutputContainer]
+        [ChoiceInput]
         public List<string> choiceText;
     }
 }
