@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f003e9aa4640d99778086d76aafa49, type: 3}
+  m_Name: New Dialogue
+  m_EditorClassIdentifier: 
+  nodes:
+  - rid: 1299412905850568753
+  - rid: 1299412905850568754
+  - rid: 1299412905850568755
+  - rid: 1299412905850568756
+  - rid: 1299412905850568757
+  - rid: 1299412905850568758
+  references:
+    version: 2
+    RefIds:
+    - rid: 1299412905850568753
+      type: {class: EntryNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 05000000
+    - rid: 1299412905850568754
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 04000000
+        speaker: 1
+        text: 
+    - rid: 1299412905850568755
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 04000000
+        speaker: 2
+        text: 
+    - rid: 1299412905850568756
+      type: {class: TextNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 04000000
+        speaker: 3
+        text: 
+    - rid: 1299412905850568757
+      type: {class: ExitNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 
+    - rid: 1299412905850568758
+      type: {class: ChoiceNode, ns: VirtualDeviants.DialogueAuthor.Nodes, asm: Assembly-CSharp}
+      data:
+        connections: 0200000003000000ffffffff
+        choices:
+        - wawaaw
+        - ggsgs
+        - fdfdfd

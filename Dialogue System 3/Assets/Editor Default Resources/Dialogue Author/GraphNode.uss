@@ -28,6 +28,12 @@
     padding: 10px;
 }
 
+.node__choice-container__row {
+    background-color: var(--blue-1);
+    margin: 10px;
+    border-radius: 6px;
+}
+
 /*
 .text-node__data-container {
     width: 400px;

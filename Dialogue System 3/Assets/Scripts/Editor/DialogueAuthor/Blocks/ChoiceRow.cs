@@ -7,8 +7,10 @@ using VirtualDeviants.Editor.DialogueAuthor.Utility;
 
 namespace VirtualDeviants.Editor.DialogueAuthor.Blocks {
     public class ChoiceRow : VisualElement {
-        private Port _port;
-        private GraphNode _node;
+        private const string CHOICE_ROW_STYLE = "node__choice-container__row";
+        
+        private readonly Port _port;
+        private readonly GraphNode _node;
         
         public ChoiceRow(
             string value,
@@ -17,6 +19,8 @@ namespace VirtualDeviants.Editor.DialogueAuthor.Blocks {
             Action<ChoiceRow> onDelete
         ) {
             _node = node;
+            
+            this.AddStyleClass(CHOICE_ROW_STYLE);
             
             Add(VisualElementFactory.CreateTextField(
                 value,
